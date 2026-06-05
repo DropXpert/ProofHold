@@ -38,11 +38,11 @@ export default function CreateDeal() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getWallet()
+    getWallet(form.priceCurrency)
       .then((w) => w.getAddress())
       .then(setSellerAddress)
       .catch(() => setSellerAddress(""));
-  }, []);
+  }, [form.priceCurrency]);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm((f) => ({ ...f, [key]: value }));

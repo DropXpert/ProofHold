@@ -3,6 +3,7 @@ import { Lock, Loader2, ShieldCheck } from "lucide-react";
 import type { Deal } from "@/types/deal";
 import { useDealStore } from "@/store/dealStore";
 import { getWallet } from "@/wallet";
+import { isCustodyConfigured } from "@/lib/config";
 import { useNavigate } from "react-router-dom";
 
 export function PaymentBox({ deal }: { deal: Deal }) {
@@ -11,11 +12,13 @@ export function PaymentBox({ deal }: { deal: Deal }) {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const usingMock = !isCustodyConfigured(deal.priceCurrency);
+
   async function handlePay() {
     setBusy(true);
     setError(null);
     try {
-      const wallet = await getWallet();
+      const wallet = await getWallet(deal.priceCurrency);
       const buyer = await wallet.getAddress();
       const result = await wallet.sendPayment({
         to: deal.sellerWalletAddress,
@@ -91,9 +94,11 @@ export function PaymentBox({ deal }: { deal: Deal }) {
       ) : null}
 
       <p className="text-[12px] leading-relaxed text-muted">
-        Payments use your connected wallet. This MVP routes payments through a
-        controlled settlement wallet — see the spec for the real Nimiq Pay
-        integration plan.
+        {usingMock
+          ? "Demo mode — no real funds move. Set the custody address in .env.local to enable real payments."
+          : deal.priceCurrency === "NIM"
+            ? "Open this page inside Nimiq Pay to pay with NIM. Funds go to the ProofHold custody address and are released when the deal confirms."
+            : "Pay with USDT via your connected EVM wallet. Funds go to the ProofHold custody address and are released when the deal confirms."}
       </p>
     </section>
   );
