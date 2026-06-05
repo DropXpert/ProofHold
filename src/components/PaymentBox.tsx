@@ -1,0 +1,100 @@
+import { useState } from "react";
+import { Lock, Loader2, ShieldCheck } from "lucide-react";
+import type { Deal } from "@/types/deal";
+import { useDealStore } from "@/store/dealStore";
+import { getWallet } from "@/wallet";
+import { useNavigate } from "react-router-dom";
+
+export function PaymentBox({ deal }: { deal: Deal }) {
+  const payDeal = useDealStore((s) => s.payDeal);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  async function handlePay() {
+    setBusy(true);
+    setError(null);
+    try {
+      const wallet = await getWallet();
+      const buyer = await wallet.getAddress();
+      const result = await wallet.sendPayment({
+        to: deal.sellerWalletAddress,
+        amount: deal.priceAmount,
+        currency: deal.priceCurrency,
+        memo: `ProofHold ${deal.id}`,
+      });
+      payDeal({
+        dealId: deal.id,
+        buyerWalletAddress: buyer,
+        paymentTxHash: result.txHash,
+      });
+      navigate(`/deal/${deal.id}/status`);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Payment failed");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section className="card space-y-4 px-5 py-5">
+      <div className="flex items-start gap-3">
+        <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-accent-soft text-accent">
+          <Lock className="h-4 w-4" />
+        </span>
+        <div className="space-y-1">
+          <h3 className="text-[15px] font-semibold text-ink">
+            Pay into protected hold
+          </h3>
+          <p className="text-[13px] text-muted">
+            Funds are held until the seller delivers and you confirm receipt.
+            If anything goes wrong, you can raise a query.
+          </p>
+        </div>
+      </div>
+
+      <div className="rounded-lg border border-dashed border-edge bg-bg p-3">
+        <div className="flex items-baseline justify-between">
+          <span className="text-[12px] uppercase tracking-wider text-muted">
+            Amount
+          </span>
+          <span className="text-[18px] font-semibold tabular-nums text-ink">
+            {deal.priceAmount}{" "}
+            <span className="text-muted">{deal.priceCurrency}</span>
+          </span>
+        </div>
+      </div>
+
+      <button
+        type="button"
+        onClick={handlePay}
+        disabled={busy}
+        className="btn-primary w-full"
+      >
+        {busy ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending payment…
+          </>
+        ) : (
+          <>
+            <ShieldCheck className="h-4 w-4" />
+            Pay into ProofHold
+          </>
+        )}
+      </button>
+
+      {error ? (
+        <p className="text-sm text-danger" role="alert">
+          {error}
+        </p>
+      ) : null}
+
+      <p className="text-[12px] leading-relaxed text-muted">
+        Payments use your connected wallet. This MVP routes payments through a
+        controlled settlement wallet — see the spec for the real Nimiq Pay
+        integration plan.
+      </p>
+    </section>
+  );
+}
