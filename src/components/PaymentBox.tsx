@@ -33,10 +33,30 @@ export function PaymentBox({ deal }: { deal: Deal }) {
       });
       navigate(`/deal/${deal.id}/status`);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Payment failed");
+      console.error("[ProofHold] payment failed:", err);
+      setError(formatPaymentError(err));
     } finally {
       setBusy(false);
     }
+  }
+
+  function formatPaymentError(err: unknown): string {
+    if (err instanceof Error) return err.message;
+    if (typeof err === "string") return err;
+    if (err && typeof err === "object") {
+      const obj = err as Record<string, unknown>;
+      const nested = obj.error as Record<string, unknown> | undefined;
+      if (nested && typeof nested.message === "string") {
+        return `${nested.type ?? "Error"}: ${nested.message}`;
+      }
+      if (typeof obj.message === "string") return obj.message;
+      try {
+        return JSON.stringify(err);
+      } catch {
+        // fall through
+      }
+    }
+    return "Payment failed";
   }
 
   return (

@@ -28,6 +28,7 @@ export class NimiqWalletProvider implements WalletProvider {
   async getAddress(): Promise<string> {
     const nimiq = await init({ timeout: 5_000 });
     const result = await nimiq.listAccounts();
+    console.debug("[ProofHold] nimiq.listAccounts:", result);
     if (isErrorResponse(result)) {
       throw new Error(`Nimiq listAccounts: ${result.error.message}`);
     }
@@ -46,26 +47,38 @@ export class NimiqWalletProvider implements WalletProvider {
 
     const nimiq = await init({ timeout: 5_000 });
 
-    // The deal store passes the seller address as `to`. For real custody,
-    // override with the ProofHold custody address — the seller is paid out
-    // later when the deal releases.
     const recipient = config.nimiq.custodyAddress;
-
-    // Nimiq amounts are in Lunas (1 NIM = 1e5 Lunas).
     const value = nimToLunas(params.amount);
 
-    const result = await nimiq.sendBasicTransaction({
+    console.debug("[ProofHold] sendBasicTransaction request:", {
       recipient,
       value,
+      amountNim: params.amount,
     });
+
+    let result;
+    try {
+      result = await nimiq.sendBasicTransaction({
+        recipient,
+        value,
+      });
+    } catch (err) {
+      console.error("[ProofHold] sendBasicTransaction threw:", err);
+      throw err;
+    }
+
+    console.debug("[ProofHold] sendBasicTransaction result:", result);
 
     if (isErrorResponse(result)) {
       throw new Error(`Nimiq sendBasicTransaction: ${result.error.message}`);
     }
 
-    // `result` here is the serialized transaction string. We treat it as
-    // the tx hash for receipt purposes; the backend (Milestone B) will
-    // match it against the on-chain tx for confirmation.
+    if (typeof result !== "string" || result.length === 0) {
+      throw new Error(
+        `Nimiq sendBasicTransaction returned unexpected value: ${JSON.stringify(result)}`
+      );
+    }
+
     return { txHash: result };
   }
 }
