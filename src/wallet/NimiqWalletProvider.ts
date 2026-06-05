@@ -47,11 +47,12 @@ export class NimiqWalletProvider implements WalletProvider {
 
     const nimiq = await init({ timeout: 5_000 });
 
-    const recipient = config.nimiq.custodyAddress;
+    const recipient = normalizeNimAddress(config.nimiq.custodyAddress);
     const value = nimToLunas(params.amount);
 
     console.debug("[ProofHold] sendBasicTransaction request:", {
-      recipient,
+      recipientRaw: config.nimiq.custodyAddress,
+      recipientNormalized: recipient,
       value,
       amountNim: params.amount,
     });
@@ -81,6 +82,23 @@ export class NimiqWalletProvider implements WalletProvider {
 
     return { txHash: result };
   }
+}
+
+function normalizeNimAddress(addr: string): string {
+  // Nimiq's user-friendly format: NQ-prefix + 9 groups of 4 alphanumerics
+  // separated by single spaces. Normalize whitespace and uppercase so paste
+  // mistakes (extra spaces, lowercase, line breaks) don't trip validation.
+  const cleaned = addr.replace(/\s+/g, " ").trim().toUpperCase();
+
+  // Pull out only the meaningful characters then re-group every 4.
+  const compact = cleaned.replace(/\s/g, "");
+  if (!/^NQ\d{2}[A-Z0-9]{32}$/.test(compact)) {
+    throw new Error(
+      `Custody address "${addr}" is not a valid Nimiq address. Expected NQXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX (NQ + 34 chars).`
+    );
+  }
+  const grouped = compact.match(/.{1,4}/g)!.join(" ");
+  return grouped;
 }
 
 function nimToLunas(amount: string): number {
