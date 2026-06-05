@@ -15,6 +15,9 @@ import { addHoursIso, nowIso } from "@/lib/time";
 import { newDealId, newId } from "@/lib/ids";
 
 const PROOF_WINDOW_HOURS = 24;
+// How long a buyer has to pay before the link expires. The spec leaves this
+// flexible — 48h matches the default delivery deadline most sellers pick.
+const PAYMENT_WINDOW_HOURS = 48;
 
 // Stable singletons so selectors don't thrash when a deal has no records yet.
 const EMPTY_PROOFS: Proof[] = [];
@@ -100,6 +103,8 @@ interface DealStoreState {
   resolveAfterProofDeadline: (dealId: string) => void;
   applyAdminDecision: (input: AdminDecisionInput) => void;
   cancelDeal: (dealId: string) => void;
+  expireDeal: (dealId: string) => void;
+  seedDemoDeals: () => void;
 
   // Dev helper
   reset: () => void;
@@ -187,6 +192,7 @@ export const useDealStore = create<DealStoreState>()(
           status: "awaiting_payment",
           createdAt: now,
           updatedAt: now,
+          paymentDeadlineAt: addHoursIso(now, PAYMENT_WINDOW_HOURS),
           buyerProofStatus: "not_submitted",
           sellerProofStatus: "not_submitted",
         };
@@ -520,6 +526,165 @@ export const useDealStore = create<DealStoreState>()(
             }),
           },
         }));
+      },
+
+      expireDeal: (dealId) => {
+        const deal = get().deals[dealId];
+        if (!deal) return;
+        if (deal.status !== "awaiting_payment") return;
+        if (!canTransition(deal.status, "expired")) return;
+        const next = transition(deal, "expired");
+        set((state) => ({
+          deals: { ...state.deals, [dealId]: next },
+          timeline: {
+            ...state.timeline,
+            [dealId]: appendTimeline(state, dealId, {
+              label: "Deal expired",
+              detail: "Buyer did not pay within the payment window.",
+              kind: "expired",
+            }),
+          },
+        }));
+      },
+
+      seedDemoDeals: () => {
+        const now = nowIso();
+        const make = (
+          patch: Partial<Deal> & { id: string; title: string; status: DealStatus }
+        ): Deal => ({
+          id: patch.id,
+          title: patch.title,
+          description:
+            patch.description ?? "Demo deal seeded for walkthrough purposes.",
+          priceAmount: patch.priceAmount ?? "20",
+          priceCurrency: patch.priceCurrency ?? "USDT",
+          sellerWalletAddress:
+            patch.sellerWalletAddress ??
+            "NQ07 DEMO SELL ER00 0000 0000 0000 0000 0000",
+          buyerWalletAddress: patch.buyerWalletAddress,
+          deliveryDeadlineHours: patch.deliveryDeadlineHours ?? 48,
+          confirmationWindowHours: patch.confirmationWindowHours ?? 24,
+          requiredDeliveryProof:
+            patch.requiredDeliveryProof ??
+            "Figma link + final PNG/SVG files.",
+          refundTerms:
+            patch.refundTerms ??
+            "Refund if files are not delivered within 48 hours.",
+          status: patch.status,
+          paymentTxHash: patch.paymentTxHash,
+          escrowTxHash: patch.escrowTxHash,
+          releaseTxHash: patch.releaseTxHash,
+          refundTxHash: patch.refundTxHash,
+          createdAt: patch.createdAt ?? now,
+          updatedAt: patch.updatedAt ?? now,
+          paidAt: patch.paidAt,
+          deliveredAt: patch.deliveredAt,
+          receivedAt: patch.receivedAt,
+          releasedAt: patch.releasedAt,
+          refundedAt: patch.refundedAt,
+          paymentDeadlineAt:
+            patch.paymentDeadlineAt ??
+            (patch.status === "awaiting_payment"
+              ? addHoursIso(now, PAYMENT_WINDOW_HOURS)
+              : undefined),
+          proofDeadlineAt: patch.proofDeadlineAt,
+          buyerProofStatus: patch.buyerProofStatus ?? "not_submitted",
+          sellerProofStatus: patch.sellerProofStatus ?? "not_submitted",
+          deliveryNote: patch.deliveryNote,
+        });
+
+        const demoBuyer = "NQ22 DEMO BUYE R000 0000 0000 0000 0000 0000";
+        const demoTx =
+          "0xdemo000000000000000000000000000000000000000000000000000000000001";
+
+        const awaiting = make({
+          id: "PH-DEMO-AWAY",
+          title: "Logo design final files",
+          priceAmount: "20",
+          priceCurrency: "USDT",
+          status: "awaiting_payment",
+        });
+        const funds = make({
+          id: "PH-DEMO-HELD",
+          title: "Notion template — finance OS",
+          priceAmount: "15",
+          priceCurrency: "USDT",
+          status: "funds_held",
+          buyerWalletAddress: demoBuyer,
+          paymentTxHash: demoTx,
+          paidAt: now,
+        });
+        const proof = make({
+          id: "PH-DEMO-PRUF",
+          title: "Brand sprint — 1h session",
+          priceAmount: "120",
+          priceCurrency: "NIM",
+          status: "proof_window",
+          buyerWalletAddress: demoBuyer,
+          paymentTxHash: demoTx,
+          paidAt: now,
+          deliveredAt: now,
+          proofDeadlineAt: addHoursIso(now, PROOF_WINDOW_HOURS),
+          buyerProofStatus: "submitted",
+        });
+        const released = make({
+          id: "PH-DEMO-DONE",
+          title: "Discord access — pro tier",
+          priceAmount: "10",
+          priceCurrency: "USDT",
+          status: "released",
+          buyerWalletAddress: demoBuyer,
+          paymentTxHash: demoTx,
+          paidAt: now,
+          deliveredAt: now,
+          receivedAt: now,
+          releasedAt: now,
+        });
+
+        const list = [awaiting, funds, proof, released];
+
+        set((state) => {
+          const deals = { ...state.deals };
+          const timeline = { ...state.timeline };
+          const queries = { ...state.queries };
+          const proofs = { ...state.proofs };
+          for (const d of list) {
+            deals[d.id] = d;
+            timeline[d.id] = [
+              {
+                id: newId("evt"),
+                dealId: d.id,
+                at: d.createdAt,
+                label: "Deal created (demo)",
+                detail: d.title,
+                kind: "created",
+              },
+            ];
+            if (d.status === "proof_window") {
+              queries[d.id] = [
+                {
+                  id: newId("qry"),
+                  dealId: d.id,
+                  raisedBy: "buyer",
+                  reason: "broken_link",
+                  details: "Link to delivered file does not load.",
+                  createdAt: now,
+                },
+              ];
+              proofs[d.id] = [
+                {
+                  id: newId("prf"),
+                  dealId: d.id,
+                  submittedBy: "buyer",
+                  explanation: "Screenshot of broken link.",
+                  attachmentUrls: ["https://example.com/screenshot.png"],
+                  createdAt: now,
+                },
+              ];
+            }
+          }
+          return { deals, timeline, queries, proofs };
+        });
       },
 
       reset: () =>

@@ -115,6 +115,7 @@ export interface Deal {
   releasedAt?: string;
   refundedAt?: string;
 
+  paymentDeadlineAt?: string;
   proofDeadlineAt?: string;
 
   buyerProofStatus: ProofStatus;

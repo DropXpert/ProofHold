@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import { Copy, Link2, Check } from "lucide-react";
+import { Copy, Link2, Check, QrCode } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 export function ShareLinkCard({ dealId }: { dealId: string }) {
   const url = useMemo(() => {
@@ -8,6 +9,7 @@ export function ShareLinkCard({ dealId }: { dealId: string }) {
   }, [dealId]);
 
   const [copied, setCopied] = useState(false);
+  const [showQr, setShowQr] = useState(false);
 
   async function copy() {
     try {
@@ -30,24 +32,50 @@ export function ShareLinkCard({ dealId }: { dealId: string }) {
       <div className="rounded-lg border border-dashed border-edge bg-bg px-3 py-2.5">
         <p className="break-all font-mono text-[12.5px] text-ink">{url}</p>
       </div>
-      <button
-        type="button"
-        onClick={copy}
-        className="btn-secondary w-full"
-        aria-live="polite"
-      >
-        {copied ? (
-          <>
-            <Check className="h-4 w-4 text-accent" />
-            Link copied
-          </>
-        ) : (
-          <>
-            <Copy className="h-4 w-4" />
-            Copy link
-          </>
-        )}
-      </button>
+      {showQr ? (
+        <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed border-edge bg-bg px-3 py-4">
+          <QRCodeSVG
+            value={url}
+            size={184}
+            level="M"
+            bgColor="#F8F3EA"
+            fgColor="#171411"
+            includeMargin={false}
+          />
+          <p className="text-[12px] text-muted">
+            Scan to open the payment page on another device.
+          </p>
+        </div>
+      ) : null}
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={copy}
+          className="btn-secondary w-full"
+          aria-live="polite"
+        >
+          {copied ? (
+            <>
+              <Check className="h-4 w-4 text-accent" />
+              Copied
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4" />
+              Copy link
+            </>
+          )}
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowQr((s) => !s)}
+          className="btn-secondary w-full"
+          aria-expanded={showQr}
+        >
+          <QrCode className="h-4 w-4" />
+          {showQr ? "Hide QR" : "Show QR"}
+        </button>
+      </div>
     </section>
   );
 }

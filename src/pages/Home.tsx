@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, FilePlus2, Receipt, Lock, Search } from "lucide-react";
+import { ArrowRight, FilePlus2, Receipt, Lock, Search, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 import { useDealStore } from "@/store/dealStore";
 import { DealCard } from "@/components/DealCard";
@@ -7,6 +7,7 @@ import { EmptyState } from "@/components/EmptyState";
 
 export default function Home() {
   const dealsMap = useDealStore((s) => s.deals);
+  const seedDemo = useDealStore((s) => s.seedDemoDeals);
   const deals = useMemo(
     () =>
       Object.values(dealsMap).sort((a, b) =>
@@ -64,12 +65,22 @@ export default function Home() {
           <EmptyState
             icon={<Receipt className="h-5 w-5" />}
             title="No deals yet"
-            description="Your first protected deal will show up here."
+            description="Your first protected deal will show up here. Or load a few demo deals to look around."
             action={
-              <Link to="/create" className="btn-secondary">
-                Create one
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-col items-center gap-2">
+                <Link to="/create" className="btn-secondary">
+                  Create one
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => seedDemo()}
+                  className="btn-ghost"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Load demo deals
+                </button>
+              </div>
             }
           />
         ) : (

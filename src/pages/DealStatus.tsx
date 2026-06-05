@@ -5,6 +5,7 @@ import {
   FilePlus,
   ShieldAlert,
   XCircle,
+  Trash2,
 } from "lucide-react";
 import { useDealStore } from "@/store/dealStore";
 import { PageHeader } from "@/components/PageHeader";
@@ -29,6 +30,7 @@ export default function DealStatus() {
   const resolveAfterDeadline = useDealStore(
     (s) => s.resolveAfterProofDeadline
   );
+  const expireDeal = useDealStore((s) => s.expireDeal);
   const viewerRole = useDealStore((s) => s.viewerRole);
 
   if (!deal) {
@@ -71,6 +73,14 @@ export default function DealStatus() {
         <CountdownTimer
           deadline={deal.proofDeadlineAt}
           onExpire={() => resolveAfterDeadline(deal.id)}
+        />
+      ) : null}
+
+      {deal.status === "awaiting_payment" && deal.paymentDeadlineAt ? (
+        <CountdownTimer
+          deadline={deal.paymentDeadlineAt}
+          label="Payment window"
+          onExpire={() => expireDeal(deal.id)}
         />
       ) : null}
 
@@ -148,11 +158,23 @@ function RoleActions({
   youProofSubmitted: boolean;
 }) {
   const viewerRole = useDealStore((s) => s.viewerRole);
+  const cancelDeal = useDealStore((s) => s.cancelDeal);
+
+  function handleCancel() {
+    if (
+      typeof window !== "undefined" &&
+      window.confirm(
+        "Cancel this deal? Buyers won't be able to pay this link anymore."
+      )
+    ) {
+      cancelDeal(deal.id);
+    }
+  }
 
   if (isTerminal(deal.status)) {
     return (
       <section className="card flex items-center gap-3 px-5 py-4">
-        {deal.status === "released" || deal.status === "received_by_buyer" ? (
+        {deal.status === "released" ? (
           <CheckCircle2 className="h-5 w-5 text-accent" />
         ) : (
           <XCircle className="h-5 w-5 text-muted" />
@@ -199,6 +221,16 @@ function RoleActions({
             Open share link
           </Link>
         )}
+        {viewerRole === "seller" ? (
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="btn-ghost w-full text-danger"
+          >
+            <Trash2 className="h-4 w-4" />
+            Cancel deal
+          </button>
+        ) : null}
       </ActionPanel>
     );
   }
