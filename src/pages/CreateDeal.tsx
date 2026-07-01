@@ -145,33 +145,26 @@ export default function CreateDeal() {
     <div className="space-y-6">
       <PageHeader
         eyebrow="New deal"
-        title="Create protected payment link"
+        title="Create payment link"
         back="/create"
       />
 
       <form onSubmit={submit} className="space-y-5">
         <section className="card space-y-4 px-5 py-5">
-          <Field
-            label="What are you selling?"
-            required
-            hint="Plain-language title. The buyer will see this."
-          >
+          <Field label="Title" required>
             <input
               className="input"
-              placeholder="Logo design final files"
+              placeholder="e.g. Logo design final files"
               value={form.title}
               onChange={(e) => update("title", e.target.value)}
               maxLength={120}
             />
           </Field>
 
-          <Field
-            label="Description"
-            hint="Optional. Extra details the buyer should know."
-          >
+          <Field label="Description" hint="Optional">
             <textarea
               className="textarea"
-              placeholder="Brand mark + wordmark, final exports in PNG / SVG / PDF."
+              placeholder="Extra details for the buyer"
               value={form.description}
               onChange={(e) => update("description", e.target.value)}
               maxLength={500}
@@ -205,7 +198,7 @@ export default function CreateDeal() {
             </Field>
           </div>
 
-          <Field label="Category" hint="Helps buyers find and trust your listing.">
+          <Field label="Category">
             <select
               className="select"
               value={form.category}
@@ -222,13 +215,13 @@ export default function CreateDeal() {
 
         <section className="card space-y-4 px-5 py-5">
           <Field
-            label="What counts as delivery?"
+            label="Delivery proof"
             required
-            hint="Be specific. This is what the buyer will check against."
+            hint="What will the buyer check to confirm delivery?"
           >
             <textarea
               className="textarea"
-              placeholder="Figma link + exported final files (PNG, SVG)"
+              placeholder="e.g. Figma link + exported PNG / SVG files"
               value={form.requiredDeliveryProof}
               onChange={(e) =>
                 update("requiredDeliveryProof", e.target.value)
@@ -237,14 +230,10 @@ export default function CreateDeal() {
             />
           </Field>
 
-          <Field
-            label="Refund terms"
-            required
-            hint="What conditions trigger a refund?"
-          >
+          <Field label="Refund terms" required>
             <textarea
               className="textarea"
-              placeholder="Refund if files are not delivered within 48 hours."
+              placeholder="e.g. Full refund if not delivered within 48 hours"
               value={form.refundTerms}
               onChange={(e) => update("refundTerms", e.target.value)}
               maxLength={400}
@@ -264,7 +253,7 @@ export default function CreateDeal() {
                 }
               />
             </Field>
-            <Field label="Confirmation window (hrs)" required>
+            <Field label="Confirm window (hrs)" required>
               <input
                 className="input tabular-nums"
                 type="number"
@@ -280,12 +269,7 @@ export default function CreateDeal() {
         </section>
 
         <section className="card flex items-center justify-between gap-3 px-5 py-4">
-          <div className="space-y-0.5">
-            <p className="field-label">Receive payment to</p>
-            <p className="text-[13px] text-muted">
-              Your connected wallet address.
-            </p>
-          </div>
+          <p className="field-label">Payout wallet</p>
           {sellerAddress ? (
             <WalletAddressBadge address={sellerAddress} />
           ) : authLoading ? (
@@ -327,7 +311,7 @@ export default function CreateDeal() {
           {submitting
             ? <Loader2 className="h-4 w-4 animate-spin" />
             : <Lock className="h-4 w-4" />}
-          {submitting ? "Creating…" : "Create protected payment link"}
+          {submitting ? "Creating…" : "Create payment link"}
         </button>
       </form>
     </div>

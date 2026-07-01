@@ -21,7 +21,7 @@ export default function DealDetail() {
     <div className="space-y-5">
       <PageHeader
         eyebrow={`Deal · ${deal.id}`}
-        title="Deal created"
+        title={deal.title}
         right={<StatusPill status={deal.status} />}
       />
 
@@ -50,12 +50,8 @@ function DealNotFound({ id }: { id?: string }) {
       <PageHeader eyebrow="Deal" title="Not found" />
       <EmptyState
         icon={<FileQuestion className="h-5 w-5" />}
-        title="We can't find that deal"
-        description={
-          id
-            ? `No deal with ID ${id} on this device.`
-            : "Missing deal ID."
-        }
+        title="Deal not found"
+        description={id ? `No deal with ID "${id}".` : "Missing deal ID."}
         action={
           <Link to="/" className="btn-secondary">
             Back to home

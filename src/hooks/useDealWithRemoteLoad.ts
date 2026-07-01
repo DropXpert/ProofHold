@@ -3,7 +3,7 @@ import { useDealStore } from "@/store/dealStore";
 
 export function useDealWithRemoteLoad(id?: string) {
   const deal = useDealStore((s) => (id ? s.getDeal(id) : undefined));
-  const loadFromSupabase = useDealStore((s) => s.loadFromSupabase);
+  const loadDealById = useDealStore((s) => s.loadDealById);
   const [loadedId, setLoadedId] = useState<string | null>(deal && id ? id : null);
 
   useEffect(() => {
@@ -19,14 +19,14 @@ export function useDealWithRemoteLoad(id?: string) {
 
     let cancelled = false;
     setLoadedId(null);
-    Promise.resolve(loadFromSupabase({ force: true })).finally(() => {
+    Promise.resolve(loadDealById(id)).finally(() => {
       if (!cancelled) setLoadedId(id);
     });
 
     return () => {
       cancelled = true;
     };
-  }, [id, deal, loadFromSupabase]);
+  }, [id, deal, loadDealById]);
 
   return {
     deal,

@@ -245,6 +245,7 @@ interface DealStoreState {
 
   // Remote (Supabase) helper - populates the local cache from the real DB
   loadFromSupabase: (options?: { force?: boolean }) => Promise<void>;
+  loadDealById: (id: string) => Promise<void>;
 }
 
 function appendTimeline(
@@ -376,8 +377,9 @@ export const useDealStore = create<DealStoreState>()(
             throw new Error(cleanDealCreationError(res.error.message || "Failed to create deal"));
           }
 
-          // Refresh local cache from DB so all selectors see the new deal
-          await (get() as any).loadFromSupabase({ force: true });
+          // Fetch just the new deal — avoids racing with any in-flight
+          // loadFromSupabase that was started before the RPC completed.
+          await (get() as any).loadDealById(res.data as string);
 
           const created = get().deals[res.data as string];
           if (!created) throw new Error("Deal created but could not be loaded. Please refresh.");
@@ -1175,6 +1177,25 @@ export const useDealStore = create<DealStoreState>()(
         } catch (err) {
           console.error("[XcrowHub] Failed to load from Supabase:", err);
           // Fall back to whatever local state we have (hybrid safety)
+        }
+      },
+
+      loadDealById: async (id) => {
+        if (!isRemoteMode()) return;
+        const supabase = getSupabaseClient();
+        try {
+          const { data: row, error } = await supabase
+            .from("deals")
+            .select("*")
+            .eq("id", id)
+            .single();
+          if (error || !row) return;
+          // Merge a single deal into the store without touching any other deals.
+          set((state) => ({
+            deals: { ...state.deals, [id]: mapDealRow(row) },
+          }));
+        } catch {
+          // ignore — caller checks get().deals[id] and handles missing
         }
       },
     }),
