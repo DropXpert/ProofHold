@@ -56,7 +56,7 @@ export default function SubmitProof() {
     return (
       <div className="space-y-5">
         <PageHeader eyebrow="Proof" title="Submit proof" />
-        <section className="card px-5 py-4 text-[12px] text-muted">
+        <section className="card px-5 py-4 text-[13px] text-muted">
           Only the buyer or seller on this deal can submit proof.
         </section>
         <Link to={`/deal/${deal.id}/status`} className="btn-secondary w-full">
@@ -115,15 +115,15 @@ export default function SubmitProof() {
       ) : null}
 
       {!open ? (
-        <section className="card px-5 py-4 text-[12px] text-muted">
+        <section className="card px-5 py-4 text-[13px] text-muted">
           The proof window is not currently open on this deal.
         </section>
       ) : youSubmitted ? (
         <section className="card space-y-3 px-5 py-5">
-          <h3 className="text-[14px] font-semibold text-ink">
+          <h3 className="text-[15px] font-semibold text-ink">
             Your proof is in
           </h3>
-          <p className="text-[12.5px] leading-relaxed text-muted">
+          <p className="text-[13.5px] leading-relaxed text-muted">
             We're waiting on the other side. If they don't submit within 24
             hours, the decision favors you.
           </p>

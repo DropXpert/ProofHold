@@ -37,8 +37,8 @@ export default function ScanDeal() {
             <Loader2 className="h-5 w-5 animate-spin" />
           </span>
           <div className="space-y-1">
-            <h1 className="text-[16px] font-semibold">Opening payment</h1>
-            <p className="text-[12px] leading-relaxed text-white/70">
+            <h1 className="text-[17px] font-semibold">Opening payment</h1>
+            <p className="text-[13px] leading-relaxed text-white/70">
               Loading deal {openingId}.
             </p>
           </div>
@@ -66,8 +66,8 @@ export default function ScanDeal() {
             <AlertTriangle className="h-5 w-5" />
           </span>
           <div className="mt-4 max-w-xs space-y-2">
-            <h1 className="text-[16px] font-semibold">QR not recognized</h1>
-            <p className="text-[12px] leading-relaxed text-white/70">{error}</p>
+            <h1 className="text-[17px] font-semibold">QR not recognized</h1>
+            <p className="text-[13px] leading-relaxed text-white/70">{error}</p>
           </div>
 
           <div className="mt-7 flex w-full max-w-xs flex-col gap-2">

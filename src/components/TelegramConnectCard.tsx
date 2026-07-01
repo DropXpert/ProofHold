@@ -81,10 +81,10 @@ export function TelegramConnectCard() {
           <TelegramIcon />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="flex items-center gap-1.5 text-[13px] font-semibold text-ink">
+          <p className="flex items-center gap-1.5 text-[14px] font-semibold text-ink">
             Telegram connected <Check className="h-3.5 w-3.5 text-accent" />
           </p>
-          <p className="truncate text-[12px] text-muted">
+          <p className="truncate text-[13px] text-muted">
             {username ? `@${username} · ` : ""}Alerts for deals, offers &amp; disputes are on.
           </p>
         </div>
@@ -92,7 +92,7 @@ export function TelegramConnectCard() {
           type="button"
           onClick={disconnect}
           disabled={busy}
-          className="shrink-0 text-[12px] font-medium text-muted transition hover:text-ink disabled:opacity-50"
+          className="shrink-0 text-[13px] font-medium text-muted transition hover:text-ink disabled:opacity-50"
         >
           {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : "Unlink"}
         </button>
@@ -111,8 +111,8 @@ export function TelegramConnectCard() {
         <TelegramIcon />
       </span>
       <div className="min-w-0 flex-1">
-        <p className="text-[13px] font-semibold text-ink">Connect Telegram</p>
-        <p className="text-[12px] text-muted">
+        <p className="text-[14px] font-semibold text-ink">Connect Telegram</p>
+        <p className="text-[13px] text-muted">
           Get notified when a deal, offer or dispute needs you — even when the app is closed.
         </p>
       </div>

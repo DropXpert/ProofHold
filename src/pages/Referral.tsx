@@ -75,7 +75,7 @@ export default function Referral() {
         <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
           <Gift className="h-[18px] w-[18px]" />
         </span>
-        <p className="text-[12.5px] leading-relaxed text-ink">
+        <p className="text-[13.5px] leading-relaxed text-ink">
           Share your link. When someone you refer completes a sale on the
           marketplace, you earn{" "}
           <span className="font-semibold">10% of the platform fee</span> on it —
@@ -88,7 +88,7 @@ export default function Referral() {
         <div className="space-y-1.5">
           <p className="field-label">Your referral code</p>
           <div className="flex items-center gap-2">
-            <code className="flex-1 rounded-lg border border-edge bg-bg px-3 py-2.5 font-mono text-[16px] font-semibold tracking-[0.2em] text-ink">
+            <code className="flex-1 rounded-lg border border-edge bg-bg px-3 py-2.5 font-mono text-[17px] font-semibold tracking-[0.2em] text-ink">
               {summary?.code ?? (loading ? "······" : "—")}
             </code>
             <button
@@ -109,7 +109,7 @@ export default function Referral() {
             <input
               readOnly
               value={link}
-              className="input flex-1 text-[12px] text-muted"
+              className="input flex-1 text-[13px] text-muted"
               onFocus={(e) => e.currentTarget.select()}
             />
             <button
@@ -137,7 +137,7 @@ export default function Referral() {
               <Users className="h-[18px] w-[18px]" />
             </span>
             <div>
-              <p className="text-[18px] font-semibold tabular-nums leading-none text-ink">
+              <p className="text-[19px] font-semibold tabular-nums leading-none text-ink">
                 {summary?.referralCount ?? 0}
               </p>
               <p className="field-label mt-1">Referrals</p>
@@ -148,7 +148,7 @@ export default function Referral() {
               <Coins className="h-[18px] w-[18px]" />
             </span>
             <div>
-              <p className="text-[18px] font-semibold tabular-nums leading-none text-ink">
+              <p className="text-[19px] font-semibold tabular-nums leading-none text-ink">
                 {summary && summary.lifetime.length > 0
                   ? summary.lifetime.map((l) => `${l.total} ${l.currency}`).join(" · ")
                   : "0"}
@@ -161,15 +161,15 @@ export default function Referral() {
 
       {/* Claimable balance */}
       <section className="card px-5 py-5 space-y-3">
-        <h3 className="text-[14px] font-semibold text-ink">Claimable balance</h3>
+        <h3 className="text-[15px] font-semibold text-ink">Claimable balance</h3>
         {claimedMsg && (
-          <p className="rounded-md border border-accent/30 bg-accent-soft px-3 py-2 text-[12px] text-accent-ink">
+          <p className="rounded-md border border-accent/30 bg-accent-soft px-3 py-2 text-[13px] text-accent-ink">
             {claimedMsg}
           </p>
         )}
-        {error && <p className="text-[12px] text-danger">{error}</p>}
+        {error && <p className="text-[13px] text-danger">{error}</p>}
         {!summary || summary.balances.length === 0 ? (
-          <p className="text-[12px] text-muted">
+          <p className="text-[13px] text-muted">
             No balance yet. Earnings appear here when your referrals complete sales.
           </p>
         ) : (
@@ -179,14 +179,14 @@ export default function Referral() {
                 key={b.currency}
                 className="flex items-center justify-between gap-3 rounded-lg border border-edge bg-bg px-3.5 py-3"
               >
-                <span className="text-[14px] font-semibold tabular-nums text-ink">
+                <span className="text-[15px] font-semibold tabular-nums text-ink">
                   {b.accrued} <span className="text-muted">{b.currency}</span>
                 </span>
                 <button
                   type="button"
                   onClick={() => onClaim(b.currency)}
                   disabled={claiming === b.currency || Number(b.accrued) <= 0}
-                  className="btn-primary px-4 py-2 text-[12px]"
+                  className="btn-primary px-4 py-2 text-[13px]"
                 >
                   {claiming === b.currency ? "Claiming…" : "Claim"}
                 </button>
@@ -194,7 +194,7 @@ export default function Referral() {
             ))}
           </ul>
         )}
-        <p className="flex items-start gap-2 text-[11.5px] leading-relaxed text-muted">
+        <p className="flex items-start gap-2 text-[12.5px] leading-relaxed text-muted">
           <Info className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           Claims are paid to the wallet you refer from. Payout is processed
           automatically once submitted.

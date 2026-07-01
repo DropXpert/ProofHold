@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   FilePlus2, Search, ShieldCheck, MessageCircle, Store,
-  Zap, ChevronRight, QrCode, ArrowRight, CheckCircle2,
+  Zap, ChevronRight, QrCode, ArrowRight, CheckCircle2, Bug,
 } from "lucide-react";
 import { useMemo } from "react";
 import { useDealStore } from "@/store/dealStore";
@@ -24,6 +24,8 @@ const QUICK_LINKS = [
 export default function Home() {
   const dealsMap = useDealStore((s) => s.deals);
   const session  = useAuthStore((s) => s.session);
+  const { pathname, search } = useLocation();
+  const reportFrom = `${pathname}${search}`;
 
   const allDeals = useMemo(() => Object.values(dealsMap), [dealsMap]);
 
@@ -41,13 +43,13 @@ export default function Home() {
       {/* Hero */}
       <section className="space-y-4 pt-1">
         <div className="space-y-2">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-accent">
+          <p className="text-[12px] font-semibold uppercase tracking-widest text-accent">
             Crypto escrow for digital deals
           </p>
-          <h1 className="text-[23px] font-bold leading-[1.2] tracking-tight text-ink">
+          <h1 className="text-[24px] font-bold leading-[1.2] tracking-tight text-ink">
             Trade crypto safely.<br />Funds held until delivery.
           </h1>
-          <p className="text-[13px] leading-relaxed text-muted">
+          <p className="text-[14px] leading-relaxed text-muted">
             Create a payment link. Buyer pays into escrow, seller delivers, funds release on confirmation. Disputes settled with on-chain proof.
           </p>
         </div>
@@ -55,7 +57,7 @@ export default function Home() {
         <div className="space-y-2">
           <Link
             to="/create/new"
-            className="relative flex w-full items-center gap-2 overflow-hidden rounded-xl bg-accent px-4 py-3 text-[13px] font-semibold text-white shadow-lift transition hover:bg-accent-ink active:scale-[0.99]"
+            className="relative flex w-full items-center gap-2 overflow-hidden rounded-xl bg-accent px-4 py-3 text-[14px] font-semibold text-white shadow-lift transition hover:bg-accent-ink active:scale-[0.99]"
           >
             <span
               className="pointer-events-none absolute inset-0 animate-shimmer"
@@ -70,15 +72,23 @@ export default function Home() {
           </Link>
 
           <div className="grid grid-cols-2 gap-2">
-            <Link to="/find" className="btn-secondary text-[12px]">
+            <Link to="/find" className="btn-secondary text-[13px]">
               <Search className="h-3.5 w-3.5 text-muted" />
               Open existing deal
             </Link>
-            <Link to="/scan" className="btn-secondary text-[12px]">
+            <Link to="/scan" className="btn-secondary text-[13px]">
               <QrCode className="h-3.5 w-3.5 text-muted" />
               Scan to pay
             </Link>
           </div>
+
+          <Link
+            to={`/bug-report?from=${encodeURIComponent(reportFrom)}`}
+            className="flex items-center gap-1.5 text-[13px] text-muted transition hover:text-warning"
+          >
+            <Bug className="h-3.5 w-3.5 shrink-0" />
+            Report a bug
+          </Link>
         </div>
       </section>
 
@@ -93,10 +103,10 @@ export default function Home() {
             <span className="absolute inset-0 animate-pulse-ring rounded-full border border-warning/40" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[12px] font-semibold text-ink">
+            <p className="text-[13px] font-semibold text-ink">
               {actionCount} deal{actionCount > 1 ? "s" : ""} need{actionCount === 1 ? "s" : ""} your attention
             </p>
-            <p className="text-[11px] text-muted">Go to Your deals</p>
+            <p className="text-[12px] text-muted">Go to Your deals</p>
           </div>
           <ChevronRight className="h-4 w-4 shrink-0 text-muted" />
         </Link>
@@ -104,7 +114,7 @@ export default function Home() {
 
       {/* How it works */}
       <section className="space-y-2.5">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted">How it works</p>
+        <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">How it works</p>
         <div className="rounded-xl border border-edge bg-surface shadow-receipt">
           {STEPS.map(({ icon: Icon, step, label, detail }, i) => (
             <div
@@ -115,13 +125,13 @@ export default function Home() {
                 <div className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft">
                   <Icon className="h-3.5 w-3.5 text-accent" />
                 </div>
-                <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[9px] font-bold text-white">
+                <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-accent text-[10px] font-bold text-white">
                   {step}
                 </span>
               </div>
               <div className="min-w-0 flex-1 pt-0.5">
-                <p className="text-[12px] font-semibold text-ink">{label}</p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted">{detail}</p>
+                <p className="text-[13px] font-semibold text-ink">{label}</p>
+                <p className="mt-0.5 text-[12px] leading-relaxed text-muted">{detail}</p>
               </div>
             </div>
           ))}
@@ -130,7 +140,7 @@ export default function Home() {
 
       {/* Quick access */}
       <section className="space-y-2">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted">Quick access</p>
+        <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">Quick access</p>
         <div className="grid grid-cols-2 gap-2">
           {QUICK_LINKS.map(({ to, icon: Icon, label, iconBg }) => (
             <Link
@@ -141,7 +151,7 @@ export default function Home() {
               <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg ${iconBg}`}>
                 <Icon className="h-3.5 w-3.5" />
               </span>
-              <span className="text-[12px] font-medium text-ink">{label}</span>
+              <span className="text-[13px] font-medium text-ink">{label}</span>
               <ChevronRight className="ml-auto h-3.5 w-3.5 shrink-0 text-edge transition group-hover:text-muted" />
             </Link>
           ))}

@@ -26,8 +26,8 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
         <Lock className="h-7 w-7 text-accent" />
       </span>
       <div className="space-y-1.5">
-        <h2 className="text-[16px] font-semibold text-ink">Connect your wallet</h2>
-        <p className="text-[12px] text-muted max-w-[240px] leading-relaxed">
+        <h2 className="text-[17px] font-semibold text-ink">Connect your wallet</h2>
+        <p className="text-[13px] text-muted max-w-[240px] leading-relaxed">
           You need to connect your Nimiq wallet to access this page.
         </p>
       </div>

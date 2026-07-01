@@ -9,9 +9,9 @@ function addressToHue(address: string): number {
 }
 
 const sizeClasses = {
-  sm: "h-8 w-8 text-[12px]",
-  md: "h-12 w-12 text-[15px]",
-  lg: "h-16 w-16 text-[21px]",
+  sm: "h-8 w-8 text-[13px]",
+  md: "h-12 w-12 text-[16px]",
+  lg: "h-16 w-16 text-[22px]",
 };
 
 export function ProfileAvatar({

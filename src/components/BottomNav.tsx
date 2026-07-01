@@ -67,7 +67,7 @@ export function BottomNav() {
                       <ProfileAvatar
                         address={session.address}
                         size="sm"
-                        className="h-5 w-5 text-[9px]"
+                        className="h-5 w-5 text-[10px]"
                         avatarDataUrl={avatarDataUrl}
                       />
                     ) : (
@@ -77,12 +77,12 @@ export function BottomNav() {
                       />
                     )}
                     {badge > 0 && (
-                      <span className="absolute -top-1 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
+                      <span className="absolute -top-1 -right-1.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-white">
                         {badge > 9 ? "9+" : badge}
                       </span>
                     )}
                   </span>
-                  <span className={cn("text-[10px] font-medium tracking-wide", active && !locked && "text-accent")}>
+                  <span className={cn("text-[11px] font-medium tracking-wide", active && !locked && "text-accent")}>
                     {label}
                   </span>
                 </Link>

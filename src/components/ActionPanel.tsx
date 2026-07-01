@@ -15,16 +15,16 @@ export function ActionPanel({
   return (
     <section className="card space-y-4 px-5 py-5">
       <header className="space-y-1">
-        <h3 className="text-[14px] font-semibold text-ink">{heading}</h3>
+        <h3 className="text-[15px] font-semibold text-ink">{heading}</h3>
         {description ? (
-          <p className="text-[12px] leading-relaxed text-muted">
+          <p className="text-[13px] leading-relaxed text-muted">
             {description}
           </p>
         ) : null}
       </header>
       <div className="space-y-2">{children}</div>
       {hint ? (
-        <div className="flex items-start gap-2 border-t border-edge pt-3 text-[11.5px] text-muted">
+        <div className="flex items-start gap-2 border-t border-edge pt-3 text-[12.5px] text-muted">
           <ArrowRight className="mt-0.5 h-3.5 w-3.5 shrink-0" />
           <div>{hint}</div>
         </div>

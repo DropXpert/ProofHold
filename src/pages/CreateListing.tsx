@@ -145,7 +145,7 @@ export default function CreateListing() {
             </Field>
           </div>
 
-          <p className="rounded-lg border border-dashed border-edge bg-bg px-3 py-2 text-[12px] leading-relaxed text-muted">
+          <p className="rounded-lg border border-dashed border-edge bg-bg px-3 py-2 text-[13px] leading-relaxed text-muted">
             A 1% platform fee applies only to completed marketplace sales.
             {Number(priceAmount) > 0 ? (
               <>
@@ -175,7 +175,7 @@ export default function CreateListing() {
               {tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
                   {tags.map((t) => (
-                    <span key={t} className="flex items-center gap-1 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-0.5 text-[11.5px] text-accent-ink">
+                    <span key={t} className="flex items-center gap-1 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-0.5 text-[12.5px] text-accent-ink">
                       #{t}
                       <button type="button" onClick={() => setTags(tags.filter((x) => x !== t))} className="text-muted hover:text-danger">
                         <X className="h-3 w-3" />
@@ -188,7 +188,7 @@ export default function CreateListing() {
                 <div className="relative flex-1">
                   <Tag className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted pointer-events-none" />
                   <input
-                    className="input pl-8 text-[13px]"
+                    className="input pl-8 text-[14px]"
                     placeholder="e.g. figma, branding, logo"
                     value={tagInput}
                     maxLength={20}

@@ -48,12 +48,12 @@ export function CountdownTimer({
           )}
         />
         <div className="leading-tight">
-          <p className="text-[11px] uppercase tracking-wider text-muted">
+          <p className="text-[12px] uppercase tracking-wider text-muted">
             {label}
           </p>
           <p
             className={cn(
-              "text-[14px] font-medium",
+              "text-[15px] font-medium",
               expired ? "text-danger" : "text-ink"
             )}
           >
@@ -63,7 +63,7 @@ export function CountdownTimer({
       </div>
       <span
         className={cn(
-          "font-mono text-[16px] font-semibold tabular-nums",
+          "font-mono text-[17px] font-semibold tabular-nums",
           expired ? "text-danger" : "text-ink"
         )}
       >

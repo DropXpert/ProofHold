@@ -58,20 +58,20 @@ export default function PayDeal() {
           {sellerFeedbacks.length > 0 ? (
             <div className="flex items-center gap-2">
               <StarRating value={Math.round(sellerAvg)} size="sm" />
-              <span className="text-[12px] font-medium text-ink">
+              <span className="text-[13px] font-medium text-ink">
                 {sellerAvg.toFixed(1)}
               </span>
-              <span className="text-[11.5px] text-muted">
+              <span className="text-[12.5px] text-muted">
                 ({sellerFeedbacks.length} review{sellerFeedbacks.length > 1 ? "s" : ""})
               </span>
             </div>
           ) : (
-            <p className="text-[12px] text-muted">No reviews yet</p>
+            <p className="text-[13px] text-muted">No reviews yet</p>
           )}
         </div>
         <Link
           to={`/profile/${encodeURIComponent(deal.sellerWalletAddress)}`}
-          className="pill border-edge bg-bg text-muted transition hover:text-ink text-[11.5px]"
+          className="pill border-edge bg-bg text-muted transition hover:text-ink text-[12.5px]"
         >
           View profile
         </Link>
@@ -82,7 +82,7 @@ export default function PayDeal() {
       {showPayment ? (
         <PaymentBox deal={deal} />
       ) : (
-        <section className="card px-5 py-4 text-[12px] text-muted">
+        <section className="card px-5 py-4 text-[13px] text-muted">
           {isTerminal(deal.status)
             ? "This deal is closed."
             : "This deal has already been paid. Open the status page to follow progress."}

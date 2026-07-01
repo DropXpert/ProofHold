@@ -54,8 +54,8 @@ function AppearanceCard() {
             {isDark ? <Moon className="h-4 w-4 text-accent" /> : <Sun className="h-4 w-4 text-warning" />}
           </span>
           <div>
-            <p className="text-[12px] font-semibold text-ink">Appearance</p>
-            <p className="text-[11px] text-muted">{isDark ? "Dark mode" : "Light mode"}</p>
+            <p className="text-[13px] font-semibold text-ink">Appearance</p>
+            <p className="text-[12px] text-muted">{isDark ? "Dark mode" : "Light mode"}</p>
           </div>
         </div>
         <ThemeToggleButton />
@@ -223,7 +223,7 @@ export default function Profile() {
                 <div className="flex items-center gap-1.5 flex-1">
                   <input
                     autoFocus
-                    className="input h-7 text-[13px] py-0 flex-1 min-w-0"
+                    className="input h-7 text-[14px] py-0 flex-1 min-w-0"
                     placeholder="Username (max 32 chars)"
                     value={draftUsername}
                     maxLength={32}
@@ -236,7 +236,7 @@ export default function Profile() {
                   <button
                     type="button"
                     onClick={saveEdit}
-                    className="shrink-0 rounded-md bg-accent px-2.5 py-1 text-[11.5px] font-medium text-white"
+                    className="shrink-0 rounded-md bg-accent px-2.5 py-1 text-[12.5px] font-medium text-white"
                   >
                     Save
                   </button>
@@ -251,11 +251,11 @@ export default function Profile() {
               ) : (
                 <>
                   {profile.username ? (
-                    <span className="text-[14px] font-semibold text-ink leading-none">
+                    <span className="text-[15px] font-semibold text-ink leading-none">
                       {profile.username}
                     </span>
                   ) : isOwn ? (
-                    <span className="text-[12px] text-muted italic">
+                    <span className="text-[13px] text-muted italic">
                       No username set
                     </span>
                   ) : null}
@@ -279,7 +279,7 @@ export default function Profile() {
                 avg={stats.avgRating}
               />
               {isAdmin && (
-                <span className="inline-flex items-center gap-1 rounded-md border border-accent bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
+                <span className="inline-flex items-center gap-1 rounded-md border border-accent bg-accent px-2 py-0.5 text-[12px] font-semibold text-white">
                   <ShieldCheck className="h-3 w-3" />
                   Admin
                 </span>
@@ -287,7 +287,7 @@ export default function Profile() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[12px] text-muted truncate">
+              <span className="font-mono text-[13px] text-muted truncate">
                 {shortenAddr(addr)}
               </span>
               <CopyButton text={addr} />
@@ -300,7 +300,7 @@ export default function Profile() {
           <button
             type="button"
             onClick={() => setProfile(addr, { avatarDataUrl: null })}
-            className="text-[11.5px] text-danger hover:underline"
+            className="text-[12.5px] text-danger hover:underline"
           >
             Remove photo
           </button>
@@ -322,7 +322,7 @@ export default function Profile() {
             { label: "Dispute rate", value: `${stats.disputeRate}%` },
           ].map(({ label, value }) => (
             <div key={label} className="space-y-0.5">
-              <p className="text-[18px] font-semibold tabular-nums text-ink leading-none">
+              <p className="text-[19px] font-semibold tabular-nums text-ink leading-none">
                 {value}
               </p>
               <p className="field-label">{label}</p>
@@ -341,8 +341,8 @@ export default function Profile() {
             <Gift className="h-[18px] w-[18px]" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-semibold text-ink">Refer &amp; earn</p>
-            <p className="text-[12px] text-muted">
+            <p className="text-[14px] font-semibold text-ink">Refer &amp; earn</p>
+            <p className="text-[13px] text-muted">
               Earn 10% of the fee on every sale your referrals make.
             </p>
           </div>
@@ -360,13 +360,13 @@ export default function Profile() {
       {receivedFeedbacks.length > 0 && (
         <section className="card px-5 py-4 space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-[14px] font-semibold text-ink">Ratings</h3>
+            <h3 className="text-[15px] font-semibold text-ink">Ratings</h3>
             <div className="flex items-center gap-1.5">
               <StarRating value={Math.round(stats.avgRating)} size="sm" />
-              <span className="text-[12px] font-semibold text-ink">
+              <span className="text-[13px] font-semibold text-ink">
                 {stats.avgRating.toFixed(1)}
               </span>
-              <span className="text-[11.5px] text-muted">
+              <span className="text-[12.5px] text-muted">
                 ({receivedFeedbacks.length})
               </span>
             </div>
@@ -379,7 +379,7 @@ export default function Profile() {
               return (
                 <div
                   key={star}
-                  className="flex items-center gap-2 text-[11.5px]"
+                  className="flex items-center gap-2 text-[12.5px]"
                 >
                   <span className="w-3 text-right text-muted">{star}</span>
                   <span className="text-warning">★</span>
@@ -400,7 +400,7 @@ export default function Profile() {
       {/* Feedback wall */}
       {receivedFeedbacks.length > 0 && (
         <section className="card px-5 py-4 space-y-3">
-          <h3 className="text-[14px] font-semibold text-ink">
+          <h3 className="text-[15px] font-semibold text-ink">
             Feedback ({receivedFeedbacks.length})
           </h3>
           <ul className="space-y-3">
@@ -415,8 +415,8 @@ export default function Profile() {
 
       {receivedFeedbacks.length === 0 && (
         <div className="card px-5 py-6 text-center space-y-1">
-          <p className="text-[13px] font-medium text-ink">No feedback yet</p>
-          <p className="text-[12px] text-muted">
+          <p className="text-[14px] font-medium text-ink">No feedback yet</p>
+          <p className="text-[13px] text-muted">
             Feedback appears after deals are finalized.
           </p>
         </div>
@@ -430,7 +430,7 @@ export default function Profile() {
               key={t}
               type="button"
               onClick={() => setTab(t)}
-              className={`flex-1 py-3 text-[11.5px] font-medium transition ${
+              className={`flex-1 py-3 text-[12.5px] font-medium transition ${
                 tab === t
                   ? "text-accent border-b-2 border-accent -mb-px"
                   : "text-muted hover:text-ink"
@@ -444,9 +444,9 @@ export default function Profile() {
         {tab === "listings" ? (
           myListings.filter(l => l.status !== "deleted").length === 0 ? (
             <div className="px-5 py-8 text-center space-y-3">
-              <p className="text-[12px] text-muted">No listings yet.</p>
+              <p className="text-[13px] text-muted">No listings yet.</p>
               {isOwn && (
-                <Link to="/listings/new" className="btn-secondary inline-flex items-center gap-2 text-[12px]">
+                <Link to="/listings/new" className="btn-secondary inline-flex items-center gap-2 text-[13px]">
                   <Package className="h-4 w-4" />
                   Create a listing
                 </Link>
@@ -458,10 +458,10 @@ export default function Profile() {
                 <li key={l.id}>
                   <Link to={`/listings/${l.id}`} className="flex items-center justify-between gap-3 px-4 py-3 hover:bg-bg transition">
                     <div className="min-w-0 flex-1">
-                      <p className="text-[12px] font-medium text-ink truncate">{l.title}</p>
-                      <p className="text-[11px] text-muted">{l.priceAmount} {l.priceCurrency} · {l.ordersCount} orders</p>
+                      <p className="text-[13px] font-medium text-ink truncate">{l.title}</p>
+                      <p className="text-[12px] text-muted">{l.priceAmount} {l.priceCurrency} · {l.ordersCount} orders</p>
                     </div>
-                    <span className={`pill text-[11px] shrink-0 ${l.status === "active" ? "border-accent/30 bg-accent-soft text-accent-ink" : "border-edge bg-bg text-muted"}`}>
+                    <span className={`pill text-[12px] shrink-0 ${l.status === "active" ? "border-accent/30 bg-accent-soft text-accent-ink" : "border-edge bg-bg text-muted"}`}>
                       {l.status}
                     </span>
                   </Link>
@@ -478,7 +478,7 @@ export default function Profile() {
             ))}
           </ul>
         ) : (
-          <div className="px-5 py-8 text-center text-[12px] text-muted">
+          <div className="px-5 py-8 text-center text-[13px] text-muted">
             No deals as {tab} yet.
           </div>
         )}

@@ -67,13 +67,13 @@ export function DealTimeline({ events }: { events: TimelineEvent[] }) {
               <Icon className="h-3 w-3" strokeWidth={2.25} />
             </span>
             <div className="space-y-0.5">
-              <p className="text-[13px] font-medium leading-snug text-ink">
+              <p className="text-[14px] font-medium leading-snug text-ink">
                 {event.label}
               </p>
               {event.detail ? (
-                <p className="text-[12px] text-muted">{event.detail}</p>
+                <p className="text-[13px] text-muted">{event.detail}</p>
               ) : null}
-              <p className="text-[11px] uppercase tracking-wider text-muted/80">
+              <p className="text-[12px] uppercase tracking-wider text-muted/80">
                 {formatDateTime(event.at)}
               </p>
             </div>

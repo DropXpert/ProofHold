@@ -67,7 +67,7 @@ export function Nav({ scrolled }: { scrolled: boolean }) {
             <img src="/logo-wordmark.png" alt="XcrowHub" className="w-40 h-auto" />
           </Link>
 
-          <nav className="hidden items-center gap-7 text-[14.5px] text-[#B9B1A2] md:flex">
+          <nav className="hidden items-center gap-7 text-[15.5px] text-[#B9B1A2] md:flex">
             <a href="/#how" className="transition hover:text-[#EDE7DA]">How it works</a>
             <Link to="/marketplace" className="transition hover:text-[#EDE7DA]">Marketplace</Link>
             <a href="/#referral" className="transition hover:text-[#EDE7DA]">Refer &amp; earn</a>
@@ -75,7 +75,7 @@ export function Nav({ scrolled }: { scrolled: boolean }) {
             <a href={NIMIQ_PAY_SITE} target="_blank" rel="noopener noreferrer" className="transition hover:text-[#EDE7DA]">Nimiq Pay</a>
           </nav>
 
-          <a href={deeplink} className="btn-gold !px-4 !py-2 !text-[13.5px]">
+          <a href={deeplink} className="btn-gold !px-4 !py-2 !text-[14.5px]">
             Launch app
             <ArrowRight className="h-3.5 w-3.5" />
           </a>
@@ -92,12 +92,12 @@ export function Footer() {
         <div className="flex items-center gap-3">
           <img src="/logo-icon.png" alt="XcrowHub" className="h-9 w-9 rounded-xl" />
           <div className="leading-tight">
-            <p className="text-[15px] font-bold">XcrowHub</p>
-            <p className="text-[12.5px] text-[#6F695C]">Protected payments for crypto deals</p>
+            <p className="text-[16px] font-bold">XcrowHub</p>
+            <p className="text-[13.5px] text-[#6F695C]">Protected payments for crypto deals</p>
           </div>
         </div>
 
-        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] text-[#928B7D]">
+        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[15px] text-[#928B7D]">
           <a href="/#how" className="transition hover:text-[#EDE7DA]">How it works</a>
           <a href="/#private-deals" className="transition hover:text-[#EDE7DA]">Private deals</a>
           <Link to="/marketplace" className="transition hover:text-[#EDE7DA]">Marketplace</Link>
@@ -108,7 +108,7 @@ export function Footer() {
           <a href={NIMIQ_PAY_SITE} target="_blank" rel="noopener noreferrer" className="transition hover:text-[#EDE7DA]">Nimiq Pay</a>
         </nav>
 
-        <p className="text-[13px] text-[#6F695C]">
+        <p className="text-[14px] text-[#6F695C]">
           © {new Date().getFullYear()} XcrowHub · Built on Nimiq Pay
         </p>
       </div>
@@ -131,7 +131,7 @@ export function SectionHeading({
       <h2 className="mt-4 text-[25px] font-extrabold leading-[1.14] tracking-tight sm:mt-5 sm:text-[32px] sm:leading-[1.1] md:text-[44px]">
         {title}
       </h2>
-      <p className="mx-auto mt-3.5 max-w-xl text-[15px] leading-relaxed text-[#B9B1A2] sm:mt-4 sm:text-[16px] md:text-[17px]">
+      <p className="mx-auto mt-3.5 max-w-xl text-[16px] leading-relaxed text-[#B9B1A2] sm:mt-4 sm:text-[17px] md:text-[18px]">
         {sub}
       </p>
     </div>

@@ -48,9 +48,9 @@ export function AlertDialog({
         style={{ animation: "alert-dialog-in 0.32s cubic-bezier(0.22,1,0.36,1) both" }}
       >
         <div className="space-y-1">
-          <h2 className="text-[15px] font-semibold text-ink">{title}</h2>
+          <h2 className="text-[16px] font-semibold text-ink">{title}</h2>
           {description && (
-            <p className="text-[13px] leading-relaxed text-muted">{description}</p>
+            <p className="text-[14px] leading-relaxed text-muted">{description}</p>
           )}
         </div>
         <div className="grid grid-cols-2 gap-2.5">

@@ -80,7 +80,7 @@ export function QrScanner({
       <div className="flex items-center justify-between px-5 py-4">
         <div className="flex items-center gap-2 text-white">
           <Camera className="h-4 w-4" />
-          <span className="text-[13px] font-semibold">Scan to pay</span>
+          <span className="text-[14px] font-semibold">Scan to pay</span>
         </div>
         <button
           type="button"
@@ -96,7 +96,7 @@ export function QrScanner({
         <div className="relative w-full max-w-[300px] overflow-hidden rounded-2xl bg-black">
           <div ref={regionRef} className="aspect-square w-full" />
           {status !== "scanning" && (
-            <div className="absolute inset-0 grid place-items-center text-center text-[12px] text-white/80">
+            <div className="absolute inset-0 grid place-items-center text-center text-[13px] text-white/80">
               {status === "starting" ? (
                 <span className="flex items-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -113,7 +113,7 @@ export function QrScanner({
             </div>
           )}
         </div>
-        <p className="mt-5 text-center text-[12px] text-white/70">
+        <p className="mt-5 text-center text-[13px] text-white/70">
           Point your camera at a XcrowHub deal QR to open and pay it.
         </p>
       </div>

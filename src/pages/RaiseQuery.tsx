@@ -65,7 +65,7 @@ export default function RaiseQuery() {
     return (
       <div className="space-y-5">
         <PageHeader eyebrow="Query" title="Raise a query" />
-        <section className="card px-5 py-4 text-[12px] text-muted">
+        <section className="card px-5 py-4 text-[13px] text-muted">
           Only the buyer or seller on this deal can raise a query.
         </section>
         <Link to={`/deal/${deal.id}/status`} className="btn-secondary w-full">
@@ -114,7 +114,7 @@ export default function RaiseQuery() {
       />
 
       <section className="rounded-card border border-warning/30 bg-warning/5 px-4 py-3.5">
-        <p className="flex items-start gap-2 text-[12px] leading-relaxed text-ink">
+        <p className="flex items-start gap-2 text-[13px] leading-relaxed text-ink">
           <ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
           <span>
             Raising a query opens a 24-hour proof window. Both sides will be
@@ -162,7 +162,7 @@ export default function RaiseQuery() {
           </button>
         </form>
       ) : (
-        <section className="card px-5 py-4 text-[12px] text-muted">
+        <section className="card px-5 py-4 text-[13px] text-muted">
           A query can't be raised at this stage of the deal.
         </section>
       )}
