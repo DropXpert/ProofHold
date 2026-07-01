@@ -50,7 +50,7 @@ export function StatusPill({
   return (
     <span
       className={cn(
-        "inline-flex min-w-0 items-center gap-1.5 text-[12px] font-medium",
+        "inline-flex min-w-0 items-center gap-1.5 text-[10.5px] font-medium",
         textClasses[tone],
         className
       )}

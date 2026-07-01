@@ -24,7 +24,7 @@ export function TxHashLink({ hash, label }: { hash: string; label?: string }) {
       type="button"
       onClick={copyToClipboard}
       title={`Click to copy full hash: ${hash}`}
-      className="inline-flex items-center gap-1.5 rounded-md border border-edge bg-bg px-2 py-0.5 font-mono text-[12px] text-ink hover:bg-surface active:scale-[0.985] transition"
+      className="inline-flex items-center gap-1.5 rounded-md border border-edge bg-bg px-2 py-0.5 font-mono text-[10.5px] text-ink hover:bg-surface active:scale-[0.985] transition"
     >
       <Hash className="h-3 w-3 text-muted" />
       {label ? <span className="font-sans text-muted">{label}</span> : null}

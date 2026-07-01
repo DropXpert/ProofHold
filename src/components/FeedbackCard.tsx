@@ -14,20 +14,20 @@ export function FeedbackCard({ feedback }: { feedback: Feedback }) {
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2 min-w-0">
           <ProfileAvatar address={feedback.fromAddr} size="sm" />
-          <span className="font-mono text-[12px] text-muted truncate">
+          <span className="font-mono text-[10.5px] text-muted truncate">
             {shortenAddr(feedback.fromAddr)}
           </span>
-          <span className="pill border-edge bg-surface text-muted text-[11px] shrink-0">
+          <span className="pill border-edge bg-surface text-muted text-[10px] shrink-0">
             {feedback.fromRole === "buyer" ? "Buyer" : "Seller"}
           </span>
         </div>
-        <span className="text-[11px] text-muted shrink-0">
+        <span className="text-[10px] text-muted shrink-0">
           {formatRelative(feedback.createdAt)}
         </span>
       </div>
       <StarRating value={feedback.rating} size="sm" />
       {feedback.comment ? (
-        <p className="text-[13.5px] text-ink leading-relaxed">{feedback.comment}</p>
+        <p className="text-[11.5px] text-ink leading-relaxed">{feedback.comment}</p>
       ) : null}
     </div>
   );

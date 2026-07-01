@@ -103,13 +103,13 @@ export default function SellerDelivery() {
             {submitting ? "Marking delivered..." : "Mark as delivered"}
           </button>
 
-          <p className="text-[12px] leading-relaxed text-muted">
+          <p className="text-[10.5px] leading-relaxed text-muted">
             Once marked, the buyer is asked to confirm receipt. Funds stay
             held until they confirm, or until a query is resolved.
           </p>
         </form>
       ) : (
-        <section className="card px-5 py-4 text-[13px] text-muted">
+        <section className="card px-5 py-4 text-[11px] text-muted">
           This deal isn't in the right state to mark delivered.
         </section>
       )}

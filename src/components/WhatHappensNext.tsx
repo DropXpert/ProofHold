@@ -45,7 +45,7 @@ export function WhatHappensNext({ status }: { status: DealStatus }) {
         {lines.map((line, idx) => (
           <li
             key={idx}
-            className="flex items-start gap-2 text-[13.5px] text-ink"
+            className="flex items-start gap-2 text-[11.5px] text-ink"
           >
             <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0 text-accent" />
             <span>{line}</span>

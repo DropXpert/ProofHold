@@ -37,7 +37,7 @@ export function PageHeader({
           {eyebrow ? (
             <p className="field-label truncate">{eyebrow}</p>
           ) : null}
-          <h1 className="truncate text-[22px] font-bold leading-tight tracking-tight text-ink">
+          <h1 className="truncate text-[18px] font-bold leading-tight tracking-tight text-ink">
             {title}
           </h1>
         </div>

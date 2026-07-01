@@ -282,18 +282,18 @@ export default function CreateDeal() {
         <section className="card flex items-center justify-between gap-3 px-5 py-4">
           <div className="space-y-0.5">
             <p className="field-label">Receive payment to</p>
-            <p className="text-[13px] text-muted">
+            <p className="text-[11px] text-muted">
               Your connected wallet address.
             </p>
           </div>
           {sellerAddress ? (
             <WalletAddressBadge address={sellerAddress} />
           ) : authLoading ? (
-            <span className="text-[12px] text-muted">Connecting...</span>
+            <span className="text-[10.5px] text-muted">Connecting...</span>
           ) : (
             <button
               type="button"
-              className="btn-secondary shrink-0 px-3 py-2 text-[12px]"
+              className="btn-secondary shrink-0 px-3 py-2 text-[10.5px]"
               onClick={() => connect(form.priceCurrency)}
             >
               Connect {form.priceCurrency}
@@ -303,7 +303,7 @@ export default function CreateDeal() {
 
         {sellerAddress ? (
           <p
-            className={`text-[12px] ${
+            className={`text-[10.5px] ${
               activeDealLimitReached ? "text-danger" : "text-muted"
             }`}
           >

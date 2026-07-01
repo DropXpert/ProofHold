@@ -104,7 +104,7 @@ export default function ListingDetail() {
     return (
       <div className="space-y-5">
         <PageHeader eyebrow="Listing" title="Not found" back="/listings" />
-        <div className="card px-5 py-10 text-center text-[13px] text-muted">
+        <div className="card px-5 py-10 text-center text-[11px] text-muted">
           This listing doesn't exist or was removed.
         </div>
       </div>
@@ -257,35 +257,35 @@ export default function ListingDetail() {
       {/* Main card */}
       <section className="card px-5 py-5 space-y-4">
         <div className="flex items-start justify-between gap-3">
-          <h1 className="text-[19px] font-bold leading-snug text-ink flex-1">{l.title}</h1>
+          <h1 className="text-[16px] font-bold leading-snug text-ink flex-1">{l.title}</h1>
           <div className="shrink-0 text-right">
-            <p className="text-[22px] font-bold tabular-nums text-ink leading-none">{l.priceAmount}</p>
-            <p className="text-[12px] text-muted mt-0.5">{l.priceCurrency}</p>
+            <p className="text-[18px] font-bold tabular-nums text-ink leading-none">{l.priceAmount}</p>
+            <p className="text-[10.5px] text-muted mt-0.5">{l.priceCurrency}</p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
           <CategoryTag category={l.category} />
           {l.tags.map((t) => (
-            <span key={t} className="pill border-edge bg-bg text-muted text-[11px]">#{t}</span>
+            <span key={t} className="pill border-edge bg-bg text-muted text-[10px]">#{t}</span>
           ))}
         </div>
 
         {l.description && (
-          <p className="text-[13.5px] leading-relaxed text-ink whitespace-pre-wrap">{l.description}</p>
+          <p className="text-[11.5px] leading-relaxed text-ink whitespace-pre-wrap">{l.description}</p>
         )}
 
         <div className="grid grid-cols-2 gap-3 rounded-xl border border-edge bg-bg px-4 py-3">
           <div className="space-y-0.5">
             <p className="field-label">Delivery</p>
-            <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
+            <div className="flex items-center gap-1.5 text-[11px] font-medium text-ink">
               <Clock className="h-3.5 w-3.5 text-muted" />
               {l.deliveryHours}h deadline
             </div>
           </div>
           <div className="space-y-0.5">
             <p className="field-label">Escrow</p>
-            <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
+            <div className="flex items-center gap-1.5 text-[11px] font-medium text-ink">
               <ShieldCheck className="h-3.5 w-3.5 text-accent" />
               Protected
             </div>
@@ -293,7 +293,7 @@ export default function ListingDetail() {
           {l.ordersCount > 0 && (
             <div className="space-y-0.5">
               <p className="field-label">Orders</p>
-              <div className="flex items-center gap-1.5 text-[13px] font-medium text-ink">
+              <div className="flex items-center gap-1.5 text-[11px] font-medium text-ink">
                 <Star className="h-3.5 w-3.5 text-warning" />
                 {l.ordersCount} completed
               </div>
@@ -308,20 +308,20 @@ export default function ListingDetail() {
           <p className="field-label">Seller</p>
           <WalletAddressBadge address={l.sellerAddr} />
         </div>
-        <Link to={`/profile/${encodeURIComponent(l.sellerAddr)}`} className="btn-secondary text-[12px] px-3 py-2 shrink-0">
+        <Link to={`/profile/${encodeURIComponent(l.sellerAddr)}`} className="btn-secondary text-[10.5px] px-3 py-2 shrink-0">
           View profile
         </Link>
       </section>
 
       {/* Delivery proof terms */}
       <section className="card px-5 py-4 space-y-2">
-        <p className="text-[13px] font-semibold text-ink">What counts as delivery</p>
-        <p className="text-[13px] text-muted leading-relaxed">{l.requiredDeliveryProof}</p>
+        <p className="text-[11px] font-semibold text-ink">What counts as delivery</p>
+        <p className="text-[11px] text-muted leading-relaxed">{l.requiredDeliveryProof}</p>
       </section>
 
       <section className="card px-5 py-4 space-y-2">
-        <p className="text-[13px] font-semibold text-ink">Refund terms</p>
-        <p className="text-[13px] text-muted leading-relaxed">{l.refundTerms}</p>
+        <p className="text-[11px] font-semibold text-ink">Refund terms</p>
+        <p className="text-[11px] text-muted leading-relaxed">{l.refundTerms}</p>
       </section>
 
       {/* ── Buyer view ───────────────────────────────────────────────────── */}
@@ -339,7 +339,7 @@ export default function ListingDetail() {
             />
           )}
 
-          {offerError && <p className="text-[12px] text-danger">{offerError}</p>}
+          {offerError && <p className="text-[10.5px] text-danger">{offerError}</p>}
 
           {/* Make-an-offer form */}
           {!myOffer && showOfferForm && session && (
@@ -383,12 +383,12 @@ export default function ListingDetail() {
                 </button>
               )}
 
-              {buyError && <p className="text-[12px] text-danger">{buyError}</p>}
+              {buyError && <p className="text-[10.5px] text-danger">{buyError}</p>}
               {!session && (
-                <p className="text-center text-[12px] text-muted">Connect your wallet to buy or make an offer.</p>
+                <p className="text-center text-[10.5px] text-muted">Connect your wallet to buy or make an offer.</p>
               )}
               {session && (
-                <p className={`text-center text-[12px] ${sellerDealLimitReached ? "text-danger" : "text-muted"}`}>
+                <p className={`text-center text-[10.5px] ${sellerDealLimitReached ? "text-danger" : "text-muted"}`}>
                   {sellerDealLimitReached
                     ? ACTIVE_DEAL_LIMIT_MESSAGE
                     : "Funds held in escrow. Released only on delivery."}
@@ -406,16 +406,16 @@ export default function ListingDetail() {
           <section className="card px-5 py-4 space-y-3">
             <div className="flex items-center gap-2">
               <Inbox className="h-4 w-4 text-accent" />
-              <h3 className="text-[14px] font-semibold text-ink">Offers</h3>
+              <h3 className="text-[12px] font-semibold text-ink">Offers</h3>
               {incoming.length > 0 && (
-                <span className="pill border-edge bg-bg text-[11px] text-muted">{incoming.length}</span>
+                <span className="pill border-edge bg-bg text-[10px] text-muted">{incoming.length}</span>
               )}
             </div>
 
-            {offerError && <p className="text-[12px] text-danger">{offerError}</p>}
+            {offerError && <p className="text-[10.5px] text-danger">{offerError}</p>}
 
             {incoming.length === 0 ? (
-              <p className="text-[13px] text-muted">No offers yet. They'll appear here in real time.</p>
+              <p className="text-[11px] text-muted">No offers yet. They'll appear here in real time.</p>
             ) : (
               <ul className="space-y-2.5">
                 {incoming.map((o) => (
@@ -436,12 +436,12 @@ export default function ListingDetail() {
 
           {/* Manage listing */}
           <section className="card px-5 py-4 space-y-3">
-            <p className="text-[13px] font-semibold text-ink">Manage listing</p>
+            <p className="text-[11px] font-semibold text-ink">Manage listing</p>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={handleToggleStatus}
-                className="btn-secondary w-full text-[13px]"
+                className="btn-secondary w-full text-[11px]"
               >
                 {l.status === "active"
                   ? <><Pause className="h-4 w-4" />Pause</>
@@ -449,7 +449,7 @@ export default function ListingDetail() {
               </button>
 
               {confirmingDelete ? (
-                <button type="button" onClick={handleDelete} className="btn-danger w-full text-[13px]">
+                <button type="button" onClick={handleDelete} className="btn-danger w-full text-[11px]">
                   <Trash2 className="h-4 w-4" />
                   Confirm delete
                 </button>
@@ -457,7 +457,7 @@ export default function ListingDetail() {
                 <button
                   type="button"
                   onClick={() => setConfirmingDelete(true)}
-                  className="btn-danger w-full text-[13px]"
+                  className="btn-danger w-full text-[11px]"
                 >
                   <Trash2 className="h-4 w-4" />
                   Delete
@@ -468,12 +468,12 @@ export default function ListingDetail() {
               <button
                 type="button"
                 onClick={() => setConfirmingDelete(false)}
-                className="text-[12px] text-muted hover:text-ink transition"
+                className="text-[10.5px] text-muted hover:text-ink transition"
               >
                 Cancel
               </button>
             )}
-            <div className={`rounded-lg px-3 py-2 text-[12px] text-center ${l.status === "active" ? "bg-accent-soft text-accent-ink" : "bg-warning/10 text-warning"}`}>
+            <div className={`rounded-lg px-3 py-2 text-[10.5px] text-center ${l.status === "active" ? "bg-accent-soft text-accent-ink" : "bg-warning/10 text-warning"}`}>
               {l.status === "active" ? "Live, buyers can purchase" : "Paused, hidden from browse"}
             </div>
           </section>

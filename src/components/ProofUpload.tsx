@@ -48,7 +48,7 @@ export function ProofUpload({ role, value, onChange }: ProofUploadProps) {
     <div className="space-y-4">
       <div className="rounded-lg border border-edge bg-bg p-3">
         <p className="field-label">Proof checklist</p>
-        <ul className="mt-2 space-y-1.5 text-[13px] text-ink">
+        <ul className="mt-2 space-y-1.5 text-[11px] text-ink">
           {checklist.map((item) => (
             <li key={item} className="flex items-start gap-2">
               <span className="mt-1.5 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-muted" />
@@ -86,7 +86,7 @@ export function ProofUpload({ role, value, onChange }: ProofUploadProps) {
         }
       >
         <input
-          className="input font-mono text-[13px]"
+          className="input font-mono text-[11px]"
           value={value.txHash}
           onChange={(e) => onChange({ ...value, txHash: e.target.value })}
           placeholder={isBuyer ? "0x…" : "https://figma.com/file/…"}
@@ -128,7 +128,7 @@ export function ProofUpload({ role, value, onChange }: ProofUploadProps) {
                 key={`${url}-${idx}`}
                 className="flex items-center justify-between gap-2 rounded-md border border-edge bg-bg px-2.5 py-1.5"
               >
-                <span className="truncate text-[13px] font-mono text-ink">
+                <span className="truncate text-[11px] font-mono text-ink">
                   {url}
                 </span>
                 <button

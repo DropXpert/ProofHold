@@ -115,12 +115,12 @@ export default function DealStatus() {
 
       <section className="card flex items-center justify-between gap-3 px-4 py-3.5">
         <div className="min-w-0 space-y-0.5">
-          <p className="text-[13px] font-semibold text-ink">Need latest status?</p>
-          <p className="text-[12px] leading-relaxed text-muted">
+          <p className="text-[11px] font-semibold text-ink">Need latest status?</p>
+          <p className="text-[10.5px] leading-relaxed text-muted">
             Use this after payment, delivery, or confirmation.
           </p>
           {refreshMessage ? (
-            <p className="text-[12px] text-muted" role="status">
+            <p className="text-[10.5px] text-muted" role="status">
               {refreshMessage}
             </p>
           ) : null}
@@ -129,7 +129,7 @@ export default function DealStatus() {
           type="button"
           onClick={updateStatus}
           disabled={refreshing}
-          className="btn-secondary shrink-0 px-3 py-2 text-[13px]"
+          className="btn-secondary shrink-0 px-3 py-2 text-[11px]"
         >
           <RefreshCw className={`h-4 w-4 ${refreshing ? "animate-spin" : ""}`} />
           Update status
@@ -158,7 +158,7 @@ export default function DealStatus() {
             label="Auto-release timer"
             onExpire={() => autoReleaseDeal(deal.id)}
           />
-          <p className="text-[12px] text-muted leading-relaxed">
+          <p className="text-[10.5px] text-muted leading-relaxed">
             {role === "seller"
               ? "Funds will auto-release to you when this timer expires if the buyer does not respond."
               : "If the buyer doesn't confirm or raise a query before this timer expires, funds release automatically to the seller."}
@@ -172,8 +172,8 @@ export default function DealStatus() {
 
       <section className="card space-y-4 px-5 py-5">
         <header className="flex items-center justify-between">
-          <h3 className="text-[15px] font-semibold text-ink">Timeline</h3>
-          <span className="text-[12px] text-muted">
+          <h3 className="text-[13px] font-semibold text-ink">Timeline</h3>
+          <span className="text-[10.5px] text-muted">
             {events.length} {events.length === 1 ? "event" : "events"}
           </span>
         </header>
@@ -189,10 +189,10 @@ export default function DealStatus() {
       {proofs.length > 0 ? (
         <section className="card space-y-4 px-5 py-5">
           <header className="flex items-center justify-between">
-            <h3 className="text-[15px] font-semibold text-ink">
+            <h3 className="text-[13px] font-semibold text-ink">
               Submitted proofs
             </h3>
-            <span className="text-[12px] text-muted">{proofs.length}</span>
+            <span className="text-[10.5px] text-muted">{proofs.length}</span>
           </header>
           <ul className="space-y-3">
             {proofs.map((p) => (
@@ -208,7 +208,7 @@ export default function DealStatus() {
                     <TxHashLink hash={p.txHash} label="ref" />
                   ) : null}
                 </div>
-                <p className="mt-2 text-[13.5px] text-ink">
+                <p className="mt-2 text-[11.5px] text-ink">
                   {p.explanation}
                 </p>
                 {p.attachmentUrls.length > 0 ? (
@@ -216,7 +216,7 @@ export default function DealStatus() {
                     {p.attachmentUrls.map((url, i) => (
                       <li
                         key={i}
-                        className="truncate font-mono text-[12px] text-muted"
+                        className="truncate font-mono text-[10.5px] text-muted"
                       >
                         {url}
                       </li>
@@ -275,7 +275,7 @@ function RoleActions({
           ) : (
             <XCircle className="h-5 w-5 text-muted" />
           )}
-          <p className="text-[14px] text-ink">
+          <p className="text-[12px] text-ink">
             {deal.status === "released" &&
               "Funds were released to the seller. This deal is complete."}
             {deal.status === "refunded" &&
@@ -289,18 +289,18 @@ function RoleActions({
         {deal.status === "released" && deal.feeAmount && Number(deal.feeAmount) > 0 && (
           <section className="card space-y-2.5 px-5 py-4">
             <p className="field-label">Payout breakdown</p>
-            <div className="flex items-center justify-between text-[14px] text-ink">
+            <div className="flex items-center justify-between text-[12px] text-ink">
               <span className="text-muted">Sale price</span>
               <span className="tabular-nums">{deal.priceAmount} {deal.priceCurrency}</span>
             </div>
-            <div className="flex items-center justify-between text-[14px] text-ink">
+            <div className="flex items-center justify-between text-[12px] text-ink">
               <span className="text-muted">
                 Platform fee ({(deal.feeBps ?? 0) / 100}%)
               </span>
               <span className="tabular-nums">−{deal.feeAmount} {deal.priceCurrency}</span>
             </div>
             <div className="divider-dashed" />
-            <div className="flex items-center justify-between text-[15px] font-semibold text-ink">
+            <div className="flex items-center justify-between text-[13px] font-semibold text-ink">
               <span>Seller received</span>
               <span className="tabular-nums">
                 {(Number(deal.priceAmount) - Number(deal.feeAmount)).toLocaleString(undefined, {
@@ -328,7 +328,7 @@ function RoleActions({
   if (role !== "buyer" && role !== "seller") {
     return (
       <ActionPanel heading="You're viewing this deal">
-        <p className="text-[13px] text-muted">
+        <p className="text-[11px] text-muted">
           Only the buyer and seller can act on this deal.
         </p>
       </ActionPanel>
@@ -500,7 +500,7 @@ function RoleActions({
   if (deal.status === "under_admin_review") {
     return (
       <ActionPanel heading="Under admin review">
-        <p className="text-[13px] text-muted">
+        <p className="text-[11px] text-muted">
           Both sides submitted proof, or the deadline passed without proof.
           An admin will release, refund, or split the funds.
         </p>

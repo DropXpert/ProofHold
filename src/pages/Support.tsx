@@ -10,9 +10,9 @@ type View = "list" | "new" | "chat";
 
 function TicketStatusPill({ status }: { status: "open" | "resolved" }) {
   return status === "resolved" ? (
-    <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[11px]">Resolved</span>
+    <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[10px]">Resolved</span>
   ) : (
-    <span className="pill border-warning/40 bg-warning/10 text-warning text-[11px]">Open</span>
+    <span className="pill border-warning/40 bg-warning/10 text-warning text-[10px]">Open</span>
   );
 }
 
@@ -82,10 +82,10 @@ function ChatOverlay({
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div className="min-w-0 flex-1">
-          <p className="text-[14px] font-semibold text-ink truncate">
+          <p className="text-[12px] font-semibold text-ink truncate">
             {ticket.subject || ticket.dealId}
           </p>
-          <p className="text-[11px] text-muted font-mono truncate">
+          <p className="text-[10px] text-muted font-mono truncate">
             {ticket.dealId}{deal ? ` · ${deal.title}` : ""}
           </p>
         </div>
@@ -95,12 +95,12 @@ function ChatOverlay({
       {/* Messages — flex-1 + overflow-y-auto fills remaining space */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {chatThread?.loading && (
-          <p className="text-center text-[13px] text-muted py-8">Loading...</p>
+          <p className="text-center text-[11px] text-muted py-8">Loading...</p>
         )}
         {!chatThread?.loading && msgs.length === 0 && (
           <div className="flex h-full flex-col items-center justify-center gap-2 text-center">
             <MessageCircle className="h-7 w-7 text-muted/40" />
-            <p className="text-[13px] text-muted">No messages yet. Our team will reply shortly.</p>
+            <p className="text-[11px] text-muted">No messages yet. Our team will reply shortly.</p>
           </div>
         )}
         {msgs.map((msg) => {
@@ -113,10 +113,10 @@ function ChatOverlay({
                   : "rounded-bl-sm bg-surface border border-edge text-ink"
               }`}>
                 {!isUser && (
-                  <p className="text-[10px] font-semibold uppercase tracking-wider opacity-60 mb-1">Support</p>
+                  <p className="text-[9px] font-semibold uppercase tracking-wider opacity-60 mb-1">Support</p>
                 )}
-                <p className="text-[14px] leading-relaxed whitespace-pre-wrap break-words">{msg.body}</p>
-                <p className={`text-[10px] mt-0.5 ${isUser ? "text-white/60" : "text-muted"}`}>
+                <p className="text-[12px] leading-relaxed whitespace-pre-wrap break-words">{msg.body}</p>
+                <p className={`text-[9px] mt-0.5 ${isUser ? "text-white/60" : "text-muted"}`}>
                   {new Date(msg.createdAt).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}
                 </p>
               </div>
@@ -125,7 +125,7 @@ function ChatOverlay({
         })}
         {isResolved && (
           <div className="flex justify-center py-2">
-            <span className="flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-1 text-[11px] text-accent-ink">
+            <span className="flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-1 text-[10px] text-accent-ink">
               <CheckCircle2 className="h-3 w-3" />
               Ticket resolved
             </span>
@@ -137,7 +137,7 @@ function ChatOverlay({
       {/* Input bar — always pinned to bottom */}
       <div className="shrink-0 border-t border-edge bg-surface px-4 py-3 safe-bottom">
         {isResolved ? (
-          <div className="flex items-center justify-center gap-2 py-1 text-[13px] text-muted">
+          <div className="flex items-center justify-center gap-2 py-1 text-[11px] text-muted">
             <span>Ticket resolved.</span>
             <button
               type="button"
@@ -151,7 +151,7 @@ function ChatOverlay({
           <form onSubmit={handleSend} className="flex gap-2">
             <input
               ref={inputRef}
-              className="input flex-1 text-[14px] py-2.5"
+              className="input flex-1 text-[12px] py-2.5"
               placeholder="Type your message..."
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
@@ -170,7 +170,7 @@ function ChatOverlay({
             </button>
           </form>
         )}
-        {chatError && <p className="text-[12px] text-danger mt-1">{chatError}</p>}
+        {chatError && <p className="text-[10.5px] text-danger mt-1">{chatError}</p>}
       </div>
     </div>
   );
@@ -242,24 +242,24 @@ export default function Support() {
           <button type="button" onClick={() => setView("list")} className="text-muted hover:text-ink transition">
             <ArrowLeft className="h-5 w-5" />
           </button>
-          <h2 className="text-[16px] font-semibold text-ink">New support ticket</h2>
+          <h2 className="text-[13px] font-semibold text-ink">New support ticket</h2>
         </div>
 
         <form onSubmit={handleCreate} className="card px-5 py-5 space-y-4">
           <div className="space-y-1.5">
             <label className="field-label">Deal ID</label>
             <input
-              className="input font-mono text-[14px] uppercase"
+              className="input font-mono text-[12px] uppercase"
               placeholder="PH-XXXX-XXXX"
               value={dealIdInput}
               onChange={(e) => setDealIdInput(e.target.value)}
             />
-            <p className="text-[11.5px] text-muted">Found on your deal status page.</p>
+            <p className="text-[10px] text-muted">Found on your deal status page.</p>
           </div>
           <div className="space-y-1.5">
             <label className="field-label">Subject</label>
             <input
-              className="input text-[14px]"
+              className="input text-[12px]"
               placeholder="e.g. Delivery not received"
               value={subjectInput}
               maxLength={80}
@@ -269,7 +269,7 @@ export default function Support() {
           <div className="space-y-1.5">
             <label className="field-label">Describe your issue</label>
             <textarea
-              className="textarea text-[14px]"
+              className="textarea text-[12px]"
               rows={4}
               placeholder="What happened? Include any relevant details, links, or transaction hashes."
               value={firstMsg}
@@ -277,7 +277,7 @@ export default function Support() {
               onChange={(e) => setFirstMsg(e.target.value)}
             />
           </div>
-          {formError && <p className="text-[12px] text-danger">{formError}</p>}
+          {formError && <p className="text-[10.5px] text-danger">{formError}</p>}
           <button type="submit" className="btn-primary w-full" disabled={creating}>
             {creating ? "Creating..." : "Open ticket"}
           </button>
@@ -294,7 +294,7 @@ export default function Support() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <PageHeader eyebrow="Help" title="Support" back={false} />
-        <button type="button" onClick={() => setView("new")} className="btn-primary flex items-center gap-1.5 px-3 py-2 text-[13px]">
+        <button type="button" onClick={() => setView("new")} className="btn-primary flex items-center gap-1.5 px-3 py-2 text-[11px]">
           <Plus className="h-3.5 w-3.5" />
           New ticket
         </button>
@@ -304,8 +304,8 @@ export default function Support() {
         <div className="card px-5 py-10 flex flex-col items-center gap-4 text-center">
           <MessageCircle className="h-8 w-8 text-muted/40" />
           <div className="space-y-1">
-            <p className="text-[14px] font-semibold text-ink">No tickets yet</p>
-            <p className="text-[12px] text-muted max-w-[220px]">
+            <p className="text-[12px] font-semibold text-ink">No tickets yet</p>
+            <p className="text-[10.5px] text-muted max-w-[220px]">
               Open a support ticket for any deal query. Our team will reply directly in the chat.
             </p>
           </div>
@@ -320,7 +320,7 @@ export default function Support() {
             <section className="space-y-2">
               <div className="flex items-center gap-1.5">
                 <Clock className="h-3.5 w-3.5 text-warning" />
-                <p className="text-[12px] font-semibold uppercase tracking-wider text-muted">Open</p>
+                <p className="text-[10.5px] font-semibold uppercase tracking-wider text-muted">Open</p>
               </div>
               <ul className="space-y-2">
                 {openTickets.map((t) => <TicketRow key={t.id} ticket={t} onOpen={openTicket} />)}
@@ -331,7 +331,7 @@ export default function Support() {
             <section className="space-y-2">
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="h-3.5 w-3.5 text-accent" />
-                <p className="text-[12px] font-semibold uppercase tracking-wider text-muted">Resolved</p>
+                <p className="text-[10.5px] font-semibold uppercase tracking-wider text-muted">Resolved</p>
               </div>
               <ul className="space-y-2">
                 {resolvedTickets.map((t) => <TicketRow key={t.id} ticket={t} onOpen={openTicket} />)}
@@ -359,10 +359,10 @@ function TicketRow({ ticket, onOpen }: { ticket: SupportTicket; onOpen: (t: Supp
         </span>
         <div className="min-w-0 flex-1 space-y-0.5">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-[13px] font-semibold text-ink truncate">{ticket.subject || ticket.dealId}</p>
+            <p className="text-[11px] font-semibold text-ink truncate">{ticket.subject || ticket.dealId}</p>
             <TicketStatusPill status={ticket.status} />
           </div>
-          <p className="font-mono text-[11px] text-muted">{ticket.dealId}</p>
+          <p className="font-mono text-[10px] text-muted">{ticket.dealId}</p>
         </div>
         <ChevronRight className="h-4 w-4 shrink-0 text-muted" />
       </button>

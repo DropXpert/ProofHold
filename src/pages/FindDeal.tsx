@@ -70,7 +70,7 @@ export default function FindDeal() {
           Scan to pay
         </button>
         {scanError ? (
-          <p className="text-[13px] text-danger" role="alert">
+          <p className="text-[11px] text-danger" role="alert">
             {scanError}
           </p>
         ) : null}

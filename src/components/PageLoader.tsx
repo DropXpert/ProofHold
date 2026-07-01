@@ -23,7 +23,7 @@ export function PageLoader({
             <Loader2 className="h-4 w-4 animate-spin" />
           </span>
           <div className="min-w-0 space-y-2">
-            <p className="text-[14px] font-semibold text-ink">{detail}</p>
+            <p className="text-[12px] font-semibold text-ink">{detail}</p>
             <div className="h-2 w-40 animate-pulse rounded-full bg-edge" />
           </div>
         </div>

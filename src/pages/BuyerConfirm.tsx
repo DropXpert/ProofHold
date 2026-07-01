@@ -67,7 +67,7 @@ export default function BuyerConfirm() {
       {deal.deliveryNote ? (
         <section className="card space-y-2 px-5 py-4">
           <p className="field-label">Seller's delivery note</p>
-          <p className="whitespace-pre-wrap text-[14px] leading-relaxed text-ink">
+          <p className="whitespace-pre-wrap text-[12px] leading-relaxed text-ink">
             {deal.deliveryNote}
           </p>
         </section>
@@ -75,7 +75,7 @@ export default function BuyerConfirm() {
 
       {canConfirm ? (
         <section className="card space-y-4 px-5 py-5">
-          <p className="text-[14px] leading-relaxed text-ink">
+          <p className="text-[12px] leading-relaxed text-ink">
             Confirm only if you received what was promised. Once confirmed,
             funds release to the seller and the deal closes.
           </p>
@@ -108,7 +108,7 @@ export default function BuyerConfirm() {
           </div>
         </section>
       ) : (
-        <section className="card px-5 py-4 text-[13px] text-muted">
+        <section className="card px-5 py-4 text-[11px] text-muted">
           This deal isn't waiting on buyer confirmation right now.
         </section>
       )}

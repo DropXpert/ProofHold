@@ -49,7 +49,7 @@ export function DealChat({ deal, viewerRole }: DealChatProps) {
         >
           <MessageCircle className="h-5 w-5 text-white" />
           {unread > 0 && (
-            <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-danger text-[10px] font-bold text-white">
+            <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
               {unread > 9 ? "9+" : unread}
             </span>
           )}
@@ -137,14 +137,14 @@ function ChatOverlay({
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div className="min-w-0 flex-1">
-          <p className="text-[14px] font-semibold text-ink truncate">
+          <p className="text-[12px] font-semibold text-ink truncate">
             Chat with {otherRole}
           </p>
-          <p className="font-mono text-[11px] text-muted truncate">
+          <p className="font-mono text-[10px] text-muted truncate">
             {otherAddr ? shortenAddr(otherAddr) : "Waiting for buyer"} · {deal.id}
           </p>
         </div>
-        <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[11px]">
+        <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[10px]">
           Live
         </span>
       </div>
@@ -152,15 +152,15 @@ function ChatOverlay({
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {thread?.loading && (
-          <p className="text-center text-[13px] text-muted py-8">Loading messages...</p>
+          <p className="text-center text-[11px] text-muted py-8">Loading messages...</p>
         )}
 
         {!thread?.loading && msgs.length === 0 && (
           <div className="flex h-full flex-col items-center justify-center gap-3 text-center">
             <MessageCircle className="h-8 w-8 text-muted/30" />
             <div className="space-y-1">
-              <p className="text-[14px] font-semibold text-ink">No messages yet</p>
-              <p className="text-[12px] text-muted max-w-[200px]">
+              <p className="text-[12px] font-semibold text-ink">No messages yet</p>
+              <p className="text-[10.5px] text-muted max-w-[200px]">
                 Chat with the {otherRole} about this deal. Messages are visible to both parties.
               </p>
             </div>
@@ -174,7 +174,7 @@ function ChatOverlay({
           if (isSystem) {
             return (
               <div key={msg.id} className="flex justify-center">
-                <span className="rounded-md border border-edge bg-bg px-3 py-1 text-[11px] text-muted">
+                <span className="rounded-md border border-edge bg-bg px-3 py-1 text-[10px] text-muted">
                   {msg.body}
                 </span>
               </div>
@@ -191,14 +191,14 @@ function ChatOverlay({
                 }`}
               >
                 {!isMe && (
-                  <p className="text-[10px] font-semibold uppercase tracking-wider opacity-60 mb-1 capitalize">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider opacity-60 mb-1 capitalize">
                     {msg.senderRole}
                   </p>
                 )}
-                <p className="text-[14px] leading-relaxed whitespace-pre-wrap break-words">
+                <p className="text-[12px] leading-relaxed whitespace-pre-wrap break-words">
                   {msg.body}
                 </p>
-                <p className={`text-[10px] mt-0.5 ${isMe ? "text-white/60" : "text-muted"}`}>
+                <p className={`text-[9px] mt-0.5 ${isMe ? "text-white/60" : "text-muted"}`}>
                   {new Date(msg.createdAt).toLocaleTimeString(undefined, {
                     hour: "numeric",
                     minute: "2-digit",
@@ -216,7 +216,7 @@ function ChatOverlay({
         <form onSubmit={handleSend} className="flex gap-2">
           <input
             ref={inputRef}
-            className="input flex-1 text-[14px] py-2.5"
+            className="input flex-1 text-[12px] py-2.5"
             placeholder={`Message ${otherRole}...`}
             value={draft}
             onChange={(e) => setDraft(e.target.value)}
@@ -238,8 +238,8 @@ function ChatOverlay({
             <Send className="h-4 w-4" />
           </button>
         </form>
-        {error && <p className="text-[12px] text-danger mt-1">{error}</p>}
-        <p className="text-[11px] text-muted mt-1.5 text-center">
+        {error && <p className="text-[10.5px] text-danger mt-1">{error}</p>}
+        <p className="text-[10px] text-muted mt-1.5 text-center">
           Both parties can see all messages in this chat.
         </p>
       </div>

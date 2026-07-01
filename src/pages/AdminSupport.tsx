@@ -6,9 +6,9 @@ import { PageHeader } from "@/components/PageHeader";
 
 function TicketStatusPill({ status }: { status: "open" | "resolved" }) {
   return status === "resolved" ? (
-    <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[11px]">Resolved</span>
+    <span className="pill border-accent/30 bg-accent-soft text-accent-ink text-[10px]">Resolved</span>
   ) : (
-    <span className="pill border-warning/40 bg-warning/10 text-warning text-[11px]">Open</span>
+    <span className="pill border-warning/40 bg-warning/10 text-warning text-[10px]">Open</span>
   );
 }
 
@@ -102,10 +102,10 @@ function AdminChatOverlay({
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div className="min-w-0 flex-1">
-          <p className="text-[14px] font-semibold text-ink truncate">
+          <p className="text-[12px] font-semibold text-ink truncate">
             {ticket.subject || ticket.dealId}
           </p>
-          <p className="font-mono text-[11px] text-muted">{ticket.dealId}</p>
+          <p className="font-mono text-[10px] text-muted">{ticket.dealId}</p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <TicketStatusPill status={ticket.status} />
@@ -114,7 +114,7 @@ function AdminChatOverlay({
               type="button"
               onClick={handleResolve}
               disabled={resolving}
-              className="flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent-soft px-2.5 py-1.5 text-[12px] font-medium text-accent-ink hover:bg-accent/10 transition"
+              className="flex items-center gap-1.5 rounded-lg border border-accent/40 bg-accent-soft px-2.5 py-1.5 text-[10.5px] font-medium text-accent-ink hover:bg-accent/10 transition"
             >
               <CheckCircle2 className="h-3.5 w-3.5" />
               Resolve
@@ -123,7 +123,7 @@ function AdminChatOverlay({
             <button
               type="button"
               onClick={handleReopen}
-              className="flex items-center gap-1.5 rounded-lg border border-edge px-2.5 py-1.5 text-[12px] font-medium text-muted hover:text-ink transition"
+              className="flex items-center gap-1.5 rounded-lg border border-edge px-2.5 py-1.5 text-[10.5px] font-medium text-muted hover:text-ink transition"
             >
               <RotateCcw className="h-3.5 w-3.5" />
               Reopen
@@ -135,7 +135,7 @@ function AdminChatOverlay({
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
         {threads[ticket.id]?.loading && (
-          <p className="text-center text-[13px] text-muted py-8">Loading...</p>
+          <p className="text-center text-[11px] text-muted py-8">Loading...</p>
         )}
         {msgs.map((msg) => {
           const isAdmin = msg.sender === "admin";
@@ -147,7 +147,7 @@ function AdminChatOverlay({
                   : "rounded-bl-sm bg-surface border border-edge text-ink"
               }`}>
                 {!isAdmin && (
-                  <p className="text-[10px] font-semibold uppercase tracking-wider opacity-60 mb-1">
+                  <p className="text-[9px] font-semibold uppercase tracking-wider opacity-60 mb-1">
                     User
                     {msg.senderAddr && msg.senderAddr !== "admin" && (
                       <span className="ml-1 font-mono normal-case opacity-70">
@@ -156,8 +156,8 @@ function AdminChatOverlay({
                     )}
                   </p>
                 )}
-                <p className="text-[14px] leading-relaxed whitespace-pre-wrap break-words">{msg.body}</p>
-                <p className={`text-[10px] mt-0.5 ${isAdmin ? "text-white/60" : "text-muted"}`}>
+                <p className="text-[12px] leading-relaxed whitespace-pre-wrap break-words">{msg.body}</p>
+                <p className={`text-[9px] mt-0.5 ${isAdmin ? "text-white/60" : "text-muted"}`}>
                   {new Date(msg.createdAt).toLocaleString(undefined, {
                     month: "short", day: "numeric", hour: "numeric", minute: "2-digit",
                   })}
@@ -168,7 +168,7 @@ function AdminChatOverlay({
         })}
         {isResolved && (
           <div className="flex justify-center py-2">
-            <span className="flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-1 text-[11px] text-accent-ink">
+            <span className="flex items-center gap-1.5 rounded-md border border-accent/30 bg-accent-soft px-2.5 py-1 text-[10px] text-accent-ink">
               <CheckCircle2 className="h-3 w-3" />
               Marked as resolved
             </span>
@@ -180,7 +180,7 @@ function AdminChatOverlay({
       {/* Input bar */}
       <div className="shrink-0 border-t border-edge bg-surface px-4 py-3">
         {isResolved ? (
-          <div className="flex items-center justify-center gap-2 py-1 text-[13px] text-muted">
+          <div className="flex items-center justify-center gap-2 py-1 text-[11px] text-muted">
             <span>Ticket resolved.</span>
             <button type="button" className="text-accent hover:underline font-medium" onClick={handleReopen}>
               Reopen to reply
@@ -190,7 +190,7 @@ function AdminChatOverlay({
           <form onSubmit={handleSend} className="flex gap-2">
             <input
               ref={inputRef}
-              className="input flex-1 text-[14px] py-2.5"
+              className="input flex-1 text-[12px] py-2.5"
               placeholder="Reply as admin..."
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
@@ -205,7 +205,7 @@ function AdminChatOverlay({
             </button>
           </form>
         )}
-        {error && <p className="text-[12px] text-danger mt-1">{error}</p>}
+        {error && <p className="text-[10.5px] text-danger mt-1">{error}</p>}
       </div>
     </div>
   );
@@ -259,13 +259,13 @@ export default function AdminSupport() {
             key={f}
             type="button"
             onClick={() => setFilter(f)}
-            className={`flex-1 rounded-lg py-1.5 text-[12px] font-medium capitalize transition ${
+            className={`flex-1 rounded-lg py-1.5 text-[10.5px] font-medium capitalize transition ${
               filter === f ? "bg-surface shadow-sm text-ink" : "text-muted hover:text-ink"
             }`}
           >
             {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)}
             {f !== "all" && (
-              <span className="ml-1 text-[10px] opacity-60">
+              <span className="ml-1 text-[9px] opacity-60">
                 ({allTickets.filter((t) => t.status === f).length})
               </span>
             )}
@@ -274,14 +274,14 @@ export default function AdminSupport() {
       </div>
 
       {loadingList ? (
-        <p className="text-center text-[13px] text-muted py-10">Loading...</p>
+        <p className="text-center text-[11px] text-muted py-10">Loading...</p>
       ) : filtered.length === 0 ? (
         <div className="card px-5 py-10 flex flex-col items-center gap-3 text-center">
           <Inbox className="h-7 w-7 text-muted/50" />
-          <p className="text-[14px] font-medium text-ink">
+          <p className="text-[12px] font-medium text-ink">
             {filter === "open" ? "No open tickets" : filter === "resolved" ? "No resolved tickets" : "No tickets yet"}
           </p>
-          <p className="text-[12px] text-muted">
+          <p className="text-[10.5px] text-muted">
             {filter === "open" ? "All caught up!" : "Tickets will appear here when users open them."}
           </p>
         </div>
@@ -303,15 +303,15 @@ export default function AdminSupport() {
                 </span>
                 <div className="min-w-0 flex-1 space-y-0.5">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-[13px] font-semibold text-ink truncate">
+                    <p className="text-[11px] font-semibold text-ink truncate">
                       {t.subject || t.dealId}
                     </p>
                     <TicketStatusPill status={t.status} />
                   </div>
                   <div className="flex items-center gap-2">
-                    <p className="font-mono text-[11px] text-muted">{t.dealId}</p>
+                    <p className="font-mono text-[10px] text-muted">{t.dealId}</p>
                     <span className="text-muted/40">·</span>
-                    <p className="text-[11px] text-muted">
+                    <p className="text-[10px] text-muted">
                       {new Date(t.updatedAt).toLocaleDateString(undefined, { month: "short", day: "numeric" })}
                     </p>
                   </div>

@@ -45,11 +45,11 @@ export function ShareLinkCard({ dealId }: { dealId: string }) {
     <section className="card space-y-3 px-5 py-5">
       <header className="flex items-center gap-2">
         <Link2 className="h-4 w-4 text-accent" />
-        <h3 className="text-[15px] font-semibold text-ink">Shareable payment link</h3>
+        <h3 className="text-[13px] font-semibold text-ink">Shareable payment link</h3>
       </header>
 
       <div className="rounded-lg border border-dashed border-edge bg-bg px-3 py-2.5">
-        <p className="break-all font-mono text-[12.5px] text-ink">{url}</p>
+        <p className="break-all font-mono text-[11px] text-ink">{url}</p>
       </div>
 
       {showQr && (
@@ -62,7 +62,7 @@ export function ShareLinkCard({ dealId }: { dealId: string }) {
             fgColor="#171411"
             includeMargin={false}
           />
-          <p className="text-[12px] text-muted">Scan to open the payment page.</p>
+          <p className="text-[10.5px] text-muted">Scan to open the payment page.</p>
         </div>
       )}
 

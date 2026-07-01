@@ -118,10 +118,10 @@ export function PaymentBox({ deal }: { deal: Deal }) {
           <Lock className="h-4 w-4" />
         </span>
         <div className="space-y-1">
-          <h3 className="text-[15px] font-semibold text-ink">
+          <h3 className="text-[13px] font-semibold text-ink">
             Pay into protected hold
           </h3>
-          <p className="text-[13px] text-muted">
+          <p className="text-[11px] text-muted">
             Funds are held until the seller delivers and you confirm receipt.
             If anything goes wrong, you can raise a query.
           </p>
@@ -130,10 +130,10 @@ export function PaymentBox({ deal }: { deal: Deal }) {
 
       <div className="rounded-lg border border-dashed border-edge bg-bg p-3">
         <div className="flex items-baseline justify-between">
-          <span className="text-[12px] uppercase tracking-wider text-muted">
+          <span className="text-[10.5px] uppercase tracking-wider text-muted">
             Amount
           </span>
-          <span className="text-[18px] font-semibold tabular-nums text-ink">
+          <span className="text-[15px] font-semibold tabular-nums text-ink">
             {deal.priceAmount}{" "}
             <span className="text-muted">{deal.priceCurrency}</span>
           </span>
@@ -165,7 +165,7 @@ export function PaymentBox({ deal }: { deal: Deal }) {
         </p>
       ) : null}
 
-      <p className="text-[12px] leading-relaxed text-muted">
+      <p className="text-[10.5px] leading-relaxed text-muted">
         {!paymentsReady
           ? "Payments are temporarily unavailable."
           : deal.priceCurrency === "NIM"

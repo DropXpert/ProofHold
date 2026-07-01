@@ -28,13 +28,13 @@ export default function Home() {
       {/* Hero */}
       <section className="space-y-5 pt-1">
         <div className="space-y-2">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-accent">
+          <p className="text-[10px] font-semibold uppercase tracking-widest text-accent">
             Crypto escrow for digital deals
           </p>
-          <h1 className="text-[26px] font-bold leading-[1.2] tracking-tight text-ink">
+          <h1 className="text-[22px] font-bold leading-[1.2] tracking-tight text-ink">
             Trade crypto safely.<br />Funds held until delivery.
           </h1>
-          <p className="text-[14px] leading-relaxed text-muted">
+          <p className="text-[12px] leading-relaxed text-muted">
             Create a protected payment link. Buyer pays into escrow, seller delivers, funds release automatically. Disputes handled with on-chain proof.
           </p>
         </div>
@@ -65,10 +65,10 @@ export default function Home() {
             <Zap className="h-4 w-4 text-warning" />
           </span>
           <div className="flex-1 min-w-0">
-            <p className="text-[13.5px] font-semibold text-ink">
+            <p className="text-[11.5px] font-semibold text-ink">
               {actionCount} deal{actionCount > 1 ? "s" : ""} need{actionCount === 1 ? "s" : ""} your attention
             </p>
-            <p className="text-[12px] text-muted">Go to Your deals</p>
+            <p className="text-[10.5px] text-muted">Go to Your deals</p>
           </div>
           <ChevronRight className="h-4 w-4 shrink-0 text-muted" />
         </Link>
@@ -76,7 +76,7 @@ export default function Home() {
 
       {/* How it works */}
       <section className="space-y-2.5">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted">How it works</p>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">How it works</p>
         <div className="grid grid-cols-3 gap-2">
           {[
             { icon: FilePlus2,   step: "1", label: "Seller creates deal" },
@@ -87,11 +87,11 @@ export default function Home() {
               key={step}
               className="flex flex-col items-center gap-2 rounded-xl border border-edge bg-surface px-2 py-3.5 text-center"
             >
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-[13px] font-bold text-accent">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-accent-soft text-[11px] font-bold text-accent">
                 {step}
               </span>
               <Icon className="h-4 w-4 text-muted" />
-              <p className="text-[11.5px] font-medium leading-tight text-ink">{label}</p>
+              <p className="text-[10px] font-medium leading-tight text-ink">{label}</p>
             </div>
           ))}
         </div>
@@ -99,23 +99,23 @@ export default function Home() {
 
       {/* Quick links */}
       <section className="space-y-2">
-        <p className="text-[11px] font-semibold uppercase tracking-widest text-muted">Quick access</p>
+        <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">Quick access</p>
         <div className="grid grid-cols-2 gap-2">
           <Link to="/create" className="card flex items-center gap-2.5 px-4 py-3.5 hover:shadow-lift transition">
             <FilePlus2 className="h-4 w-4 text-accent shrink-0" />
-            <span className="text-[13px] font-medium text-ink">Your deals</span>
+            <span className="text-[11px] font-medium text-ink">Your deals</span>
           </Link>
           <Link to="/listings" className="card flex items-center gap-2.5 px-4 py-3.5 hover:shadow-lift transition">
             <Store className="h-4 w-4 text-accent shrink-0" />
-            <span className="text-[13px] font-medium text-ink">Marketplace</span>
+            <span className="text-[11px] font-medium text-ink">Marketplace</span>
           </Link>
           <Link to="/find" className="card flex items-center gap-2.5 px-4 py-3.5 hover:shadow-lift transition">
             <Search className="h-4 w-4 text-accent shrink-0" />
-            <span className="text-[13px] font-medium text-ink">Find a deal</span>
+            <span className="text-[11px] font-medium text-ink">Find a deal</span>
           </Link>
           <Link to="/support" className="card flex items-center gap-2.5 px-4 py-3.5 hover:shadow-lift transition">
             <MessageCircle className="h-4 w-4 text-accent shrink-0" />
-            <span className="text-[13px] font-medium text-ink">Support</span>
+            <span className="text-[11px] font-medium text-ink">Support</span>
           </Link>
         </div>
       </section>
