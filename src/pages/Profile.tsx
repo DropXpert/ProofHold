@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Copy, Check, Pencil, X, Camera, Package, ShieldCheck, Gift, ChevronRight } from "lucide-react";
+import { Copy, Check, Pencil, X, Camera, Package, ShieldCheck, Gift, ChevronRight, Moon, Sun } from "lucide-react";
+import { useThemeStore } from "@/store/themeStore";
 import { useDealStore } from "@/store/dealStore";
 import { useAuthStore } from "@/store/authStore";
 import { useProfileStore } from "@/store/profileStore";
@@ -38,6 +39,35 @@ async function resizeImageToDataUrl(file: File, maxPx = 256): Promise<string> {
     img.onerror = reject;
     img.src = url;
   });
+}
+
+function AppearanceCard() {
+  const { theme, toggle } = useThemeStore();
+  const isDark = theme === "dark";
+  return (
+    <section className="card px-5 py-4">
+      <button
+        type="button"
+        onClick={toggle}
+        className="flex w-full items-center justify-between gap-3"
+      >
+        <div className="flex items-center gap-3">
+          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent-soft">
+            {isDark
+              ? <Moon className="h-4 w-4 text-accent" />
+              : <Sun className="h-4 w-4 text-accent" />}
+          </span>
+          <div className="text-left">
+            <p className="text-[11px] font-semibold text-ink">Appearance</p>
+            <p className="text-[10px] text-muted">{isDark ? "Dark mode on" : "Light mode on"}</p>
+          </div>
+        </div>
+        <div className={`relative h-5 w-9 rounded-full transition-colors ${isDark ? "bg-accent" : "bg-edge"}`}>
+          <span className={`absolute top-0.5 h-4 w-4 rounded-full bg-white shadow-receipt transition-transform ${isDark ? "translate-x-4" : "translate-x-0.5"}`} />
+        </div>
+      </button>
+    </section>
+  );
 }
 
 export default function Profile() {
@@ -346,6 +376,9 @@ export default function Profile() {
 
       {/* Telegram notifications (own profile only) */}
       {isOwn && <TelegramConnectCard />}
+
+      {/* Appearance (own profile only) */}
+      {isOwn && <AppearanceCard />}
 
       {/* Rating distribution */}
       {receivedFeedbacks.length > 0 && (

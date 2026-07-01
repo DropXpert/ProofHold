@@ -6,11 +6,13 @@ import { useDealStore } from "@/store/dealStore";
 import { useAuthStore } from "@/store/authStore";
 import { useSupportStore } from "@/store/supportStore";
 import { useNotificationStore } from "@/store/notificationStore";
+import { useThemeStore } from "@/store/themeStore";
 import { BottomNav } from "@/components/BottomNav";
 import { AdminGuard } from "@/components/AdminGuard";
 import { AuthGuard } from "@/components/AuthGuard";
 import { PageLoader } from "@/components/PageLoader";
 import { OpenInNimiqPay } from "@/components/OpenInNimiqPay";
+import { StarsBackground } from "@/components/StarsBackground";
 
 const Landing = lazy(() => import("@/pages/Landing"));
 const Marketplace = lazy(() => import("@/pages/Marketplace"));
@@ -220,6 +222,7 @@ export default function App() {
 function MiniAppShell() {
   const restoreSession = useAuthStore((s) => s.restoreSession);
   const session = useAuthStore((s) => s.session);
+  const theme = useThemeStore((s) => s.theme);
   const myTickets = useSupportStore((s) => s.myTickets);
   const loadMyTickets = useSupportStore((s) => s.loadMyTickets);
   const startListening = useNotificationStore((s) => s.startListening);
@@ -269,6 +272,8 @@ function MiniAppShell() {
 
   return (
     <div className="min-h-full">
+      {theme === "dark" && <StarsBackground />}
+      <div className="relative z-10 min-h-full">
       <AppHeader />
       <main className="app-shell">
         <Suspense fallback={<RouteFallback />}>
@@ -309,6 +314,7 @@ function MiniAppShell() {
         </Suspense>
       </main>
       <BottomNav />
+      </div>
     </div>
   );
 }

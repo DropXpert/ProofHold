@@ -3,8 +3,42 @@
 @tailwind utilities;
 
 @layer base {
+  /* ── Light mode tokens (default) ──────────────────────────────── */
   :root {
-    color-scheme: only light;
+    color-scheme: light;
+    /* RGB channels — used as rgb(var(--c-x) / alpha) in Tailwind */
+    --c-bg:          248 243 234;
+    --c-surface:     255 253 248;
+    --c-ink:         23 20 17;
+    --c-muted:       113 105 95;
+    --c-edge:        228 216 199;
+    --c-accent:      47 111 94;
+    --c-accent-soft: 221 235 229;
+    --c-accent-ink:  31 74 63;
+    --c-warning:     183 121 31;
+    --c-danger:      185 74 72;
+    /* Shadows */
+    --shadow-receipt: 0 1px 0 rgba(23,20,17,0.04), 0 1px 2px rgba(23,20,17,0.06);
+    --shadow-lift:    0 8px 24px -8px rgba(23,20,17,0.18);
+    --shadow-glow:    0 0 0 1px rgba(232,185,100,0.18), 0 24px 60px -20px rgba(232,185,100,0.35);
+  }
+
+  /* ── Dark mode tokens ─────────────────────────────────────────── */
+  .dark {
+    color-scheme: dark;
+    --c-bg:          11 22 18;
+    --c-surface:     17 32 24;
+    --c-ink:         237 231 218;
+    --c-muted:       122 154 140;
+    --c-edge:        27 46 36;
+    --c-accent:      79 209 165;
+    --c-accent-soft: 13 42 28;
+    --c-accent-ink:  160 232 204;
+    --c-warning:     232 185 100;
+    --c-danger:      224 90 88;
+    --shadow-receipt: 0 1px 0 rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.45);
+    --shadow-lift:    0 8px 28px -8px rgba(0,0,0,0.65);
+    --shadow-glow:    0 0 0 1px rgba(79,209,165,0.2), 0 24px 60px -20px rgba(79,209,165,0.3);
   }
 
   html,
@@ -15,28 +49,26 @@
 
   html {
     @apply bg-bg;
-    color-scheme: only light;
   }
 
   body {
     @apply bg-bg text-ink font-sans antialiased;
     font-feature-settings: "cv11", "ss01", "ss03";
     -webkit-tap-highlight-color: transparent;
-    color-scheme: only light;
   }
 
-  /* Subtle paper grain — keeps the receipt feel without being noisy */
+  /* Paper grain — warm dots in light, barely-visible in dark */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background-image: radial-gradient(
-      rgba(23, 20, 17, 0.025) 1px,
-      transparent 1px
-    );
+    background-image: radial-gradient(rgba(23,20,17,0.025) 1px, transparent 1px);
     background-size: 3px 3px;
     z-index: 0;
+  }
+  .dark body::before {
+    background-image: radial-gradient(rgba(255,255,255,0.012) 1px, transparent 1px);
   }
 
   #root {
