@@ -50,7 +50,7 @@ function NotificationBell() {
       >
         <Bell className="h-4 w-4" />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[8px] font-bold text-white">
+          <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -59,15 +59,15 @@ function NotificationBell() {
       {open && (
         <div className="absolute right-0 top-10 z-50 w-72 rounded-xl border border-edge bg-surface shadow-lift overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 border-b border-edge">
-            <p className="text-[11px] font-semibold text-ink">Notifications</p>
+            <p className="text-[12px] font-semibold text-ink">Notifications</p>
             {notifications.length > 0 && (
-              <button type="button" onClick={markAllRead} className="text-[10px] text-muted hover:text-accent transition">
+              <button type="button" onClick={markAllRead} className="text-[11px] text-muted hover:text-accent transition">
                 Mark all read
               </button>
             )}
           </div>
           {notifications.length === 0 ? (
-            <div className="px-4 py-6 text-center text-[10.5px] text-muted">No notifications yet</div>
+            <div className="px-4 py-6 text-center text-[11.5px] text-muted">No notifications yet</div>
           ) : (
             <ul className="max-h-64 overflow-y-auto divide-y divide-edge">
               {notifications.slice(0, 10).map((n) => (
@@ -79,10 +79,10 @@ function NotificationBell() {
                   >
                     <div className="flex items-center gap-2">
                       {!n.read && <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />}
-                      <p className="text-[11px] font-semibold text-ink truncate">{n.title}</p>
+                      <p className="text-[12px] font-semibold text-ink truncate">{n.title}</p>
                     </div>
-                    <p className="text-[10px] text-muted line-clamp-2">{n.body}</p>
-                    <p className="text-[9px] text-muted/60">
+                    <p className="text-[11px] text-muted line-clamp-2">{n.body}</p>
+                    <p className="text-[10px] text-muted/60">
                       {new Date(n.createdAt).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}
                     </p>
                   </button>
@@ -138,19 +138,19 @@ function WalletMenu({ address }: { address: string }) {
               setOpen(false);
               navigate(`/profile/${encodeURIComponent(address)}`);
             }}
-            className="flex w-full items-center gap-2.5 px-4 py-3 text-[11px] text-ink hover:bg-bg transition border-b border-edge"
+            className="flex w-full items-center gap-2.5 px-4 py-3 text-[12px] text-ink hover:bg-bg transition border-b border-edge"
           >
             <Wallet className="h-3.5 w-3.5 text-muted shrink-0" />
-            <span className="truncate font-mono text-[10px] text-muted">{shortenAddr(address)}</span>
+            <span className="truncate font-mono text-[11px] text-muted">{shortenAddr(address)}</span>
           </button>
           <div className="flex w-full items-center gap-2.5 px-4 py-3 border-b border-edge">
             <CopyButton text={address} size="sm" />
-            <span className="text-[11px] text-ink">Copy address</span>
+            <span className="text-[12px] text-ink">Copy address</span>
           </div>
           <button
             type="button"
             onClick={handleDisconnect}
-            className="flex w-full items-center gap-2.5 px-4 py-3 text-[11px] text-danger hover:bg-danger/5 transition"
+            className="flex w-full items-center gap-2.5 px-4 py-3 text-[12px] text-danger hover:bg-danger/5 transition"
           >
             <LogOut className="h-3.5 w-3.5 shrink-0" />
             <span>Disconnect</span>
@@ -178,8 +178,8 @@ export function AppHeader() {
     <header className="mx-auto flex w-full max-w-app items-center justify-between gap-3 px-5 pt-5">
       <Link to={isAdmin ? "/admin" : "/"} className="flex items-center gap-2 min-w-0">
         <img src="/logo-icon.png" alt="XcrowHub" className="h-9 w-9 shrink-0 rounded-card" />
-        <span className="min-w-0 truncate text-[13px] font-semibold tracking-tight text-ink">XcrowHub</span>
-        <span className="shrink-0 rounded-[4px] border border-warning/30 bg-warning/10 px-1 py-0.5 text-[8px] font-bold uppercase leading-none tracking-wide text-warning">
+        <span className="min-w-0 truncate text-[14px] font-semibold tracking-tight text-ink">XcrowHub</span>
+        <span className="shrink-0 rounded-[4px] border border-warning/30 bg-warning/10 px-1 py-0.5 text-[9px] font-bold uppercase leading-none tracking-wide text-warning">
           beta
         </span>
       </Link>
@@ -187,7 +187,7 @@ export function AppHeader() {
       <div className="flex shrink-0 items-center gap-2">
         <Link
           to={`/bug-report?from=${encodeURIComponent(reportFrom)}`}
-          className="flex h-8 items-center gap-1.5 rounded-lg border border-edge bg-surface px-2 text-[10.5px] font-semibold text-muted transition hover:border-warning/40 hover:text-warning"
+          className="flex h-8 items-center gap-1.5 rounded-lg border border-edge bg-surface px-2 text-[11.5px] font-semibold text-muted transition hover:border-warning/40 hover:text-warning"
           title="Report bug"
           aria-label="Report bug"
         >
@@ -202,7 +202,7 @@ export function AppHeader() {
               <Link
                 to={onAdmin ? "/" : "/admin"}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[10.5px] font-semibold transition",
+                  "flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[11.5px] font-semibold transition",
                   onAdmin
                     ? "border-accent bg-accent text-white"
                     : "border-accent/60 bg-accent-soft text-accent hover:bg-accent hover:text-white"

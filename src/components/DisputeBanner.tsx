@@ -53,8 +53,8 @@ export function DisputeBanner({ deal }: { deal: Deal }) {
             <AlertTriangle className="h-[18px] w-[18px]" />
           </span>
           <div className="min-w-0 flex-1 space-y-1">
-            <p className="text-[12px] font-semibold text-ink">Action needed — a dispute is open</p>
-            <p className="text-[11px] leading-relaxed text-muted">
+            <p className="text-[13px] font-semibold text-ink">Action needed — a dispute is open</p>
+            <p className="text-[12px] leading-relaxed text-muted">
               Submit your proof{left ? <> within <span className="font-semibold text-ink">{left}</span></> : " before the window closes"}.
               Disputes are decided on evidence — without it, the deal goes to an admin to review.
             </p>
@@ -90,8 +90,8 @@ function Note({ icon, title, body }: { icon: React.ReactNode; title: string; bod
           {icon}
         </span>
         <div className="min-w-0 flex-1 space-y-1">
-          <p className="text-[12px] font-semibold text-ink">{title}</p>
-          <p className="text-[11px] leading-relaxed text-muted">{body}</p>
+          <p className="text-[13px] font-semibold text-ink">{title}</p>
+          <p className="text-[12px] leading-relaxed text-muted">{body}</p>
         </div>
       </div>
     </section>

@@ -12,11 +12,11 @@ export function OpenInNimiqPay() {
       <img src="/logo-icon.png" alt="XcrowHub" className="h-16 w-16 shrink-0 rounded-2xl" />
 
       <div className="space-y-2">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">XcrowHub</p>
-        <h1 className="text-[18px] font-bold leading-snug tracking-tight text-ink">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">XcrowHub</p>
+        <h1 className="text-[19px] font-bold leading-snug tracking-tight text-ink">
           Open inside Nimiq Pay
         </h1>
-        <p className="text-[12px] leading-relaxed text-muted">
+        <p className="text-[13px] leading-relaxed text-muted">
           XcrowHub is a Nimiq Pay mini app. Open it in the Nimiq Pay wallet to connect,
           pay into escrow, and manage protected deals.
         </p>
@@ -28,13 +28,13 @@ export function OpenInNimiqPay() {
       </a>
 
       <div className="w-full max-w-xs space-y-2.5">
-        <p className="text-[10px] uppercase tracking-wider text-muted">Don't have the app?</p>
+        <p className="text-[11px] uppercase tracking-wider text-muted">Don't have the app?</p>
         <div className="grid grid-cols-2 gap-2">
           <a
             href={NIMIQ_PAY_IOS}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary text-[11px]"
+            className="btn-secondary text-[12px]"
           >
             <Apple className="h-4 w-4" />
             iOS
@@ -43,7 +43,7 @@ export function OpenInNimiqPay() {
             href={NIMIQ_PAY_ANDROID}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-secondary text-[11px]"
+            className="btn-secondary text-[12px]"
           >
             <Play className="h-4 w-4" />
             Android
@@ -53,7 +53,7 @@ export function OpenInNimiqPay() {
           href={NIMIQ_PAY_SITE}
           target="_blank"
           rel="noopener noreferrer"
-          className="block text-[10.5px] text-muted underline-offset-2 hover:text-accent hover:underline"
+          className="block text-[11.5px] text-muted underline-offset-2 hover:text-accent hover:underline"
         >
           Learn about Nimiq Pay
         </a>

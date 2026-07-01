@@ -79,12 +79,12 @@ export function OfferCard({
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-baseline gap-2">
-            <span className="text-[15px] font-bold tabular-nums text-ink leading-none">
+            <span className="text-[16px] font-bold tabular-nums text-ink leading-none">
               {offer.currentAmount}
             </span>
-            <span className="text-[10.5px] font-medium text-muted">{offer.currency}</span>
+            <span className="text-[11.5px] font-medium text-muted">{offer.currency}</span>
             {wasCountered && (
-              <span className="text-[10.5px] text-muted line-through tabular-nums">
+              <span className="text-[11.5px] text-muted line-through tabular-nums">
                 {offer.originalAmount}
               </span>
             )}
@@ -97,7 +97,7 @@ export function OfferCard({
         </div>
         <span
           className={cn(
-            "inline-flex shrink-0 items-center gap-1.5 text-[10.5px] font-medium",
+            "inline-flex shrink-0 items-center gap-1.5 text-[11.5px] font-medium",
             STATUS_TEXT[displayStatus]
           )}
         >
@@ -108,14 +108,14 @@ export function OfferCard({
 
       {/* Buyer's message */}
       {offer.message && (
-        <p className="rounded-lg bg-bg px-3 py-2 text-[11px] leading-relaxed text-ink">
+        <p className="rounded-lg bg-bg px-3 py-2 text-[12px] leading-relaxed text-ink">
           {offer.message}
         </p>
       )}
 
       {/* Expiry countdown for active offers */}
       {isActive && (
-        <p className="flex items-center gap-1.5 text-[10px] text-muted">
+        <p className="flex items-center gap-1.5 text-[11px] text-muted">
           <Clock className="h-3 w-3" />
           Expires in{" "}
           <span className="font-mono tabular-nums">{formatCountdown(msUntil(offer.expiresAt))}</span>
@@ -125,12 +125,12 @@ export function OfferCard({
       {/* Accepted → pay CTA / status */}
       {displayStatus === "accepted" &&
         (viewer === "buyer" && offer.dealId ? (
-          <Link to={`/deal/${offer.dealId}/pay`} className="btn-primary w-full text-[11px]">
+          <Link to={`/deal/${offer.dealId}/pay`} className="btn-primary w-full text-[12px]">
             <CreditCard className="h-4 w-4" />
             Pay now: {offer.currentAmount} {offer.currency}
           </Link>
         ) : (
-          <p className="text-[11px] text-accent-ink">
+          <p className="text-[12px] text-accent-ink">
             Accepted at {offer.currentAmount} {offer.currency}
             {viewer === "seller" ? " Buyer has been asked to pay." : "."}
           </p>
@@ -139,7 +139,7 @@ export function OfferCard({
       {/* Seller actions on a pending offer */}
       {sellerActs && !countering && (
         <div className="grid grid-cols-3 gap-2">
-          <button type="button" onClick={onAccept} disabled={busy} className="btn-primary text-[11px]">
+          <button type="button" onClick={onAccept} disabled={busy} className="btn-primary text-[12px]">
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
             Accept
           </button>
@@ -147,12 +147,12 @@ export function OfferCard({
             type="button"
             onClick={() => setCountering(true)}
             disabled={busy}
-            className="btn-secondary text-[11px]"
+            className="btn-secondary text-[12px]"
           >
             <Reply className="h-4 w-4" />
             Counter
           </button>
-          <button type="button" onClick={onDecline} disabled={busy} className="btn-danger text-[11px]">
+          <button type="button" onClick={onDecline} disabled={busy} className="btn-danger text-[12px]">
             <X className="h-4 w-4" />
             Decline
           </button>
@@ -166,12 +166,12 @@ export function OfferCard({
             <input
               autoFocus
               inputMode="decimal"
-              className="input pr-14 text-[13px]"
+              className="input pr-14 text-[14px]"
               value={counterAmount}
               onChange={(e) => setCounterAmount(e.target.value.replace(/[^0-9.]/g, ""))}
               placeholder="Counter price"
             />
-            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10.5px] font-medium text-muted">
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11.5px] font-medium text-muted">
               {offer.currency}
             </span>
           </div>
@@ -180,7 +180,7 @@ export function OfferCard({
               type="button"
               onClick={submitCounter}
               disabled={busy || !counterValid}
-              className="btn-primary text-[11px]"
+              className="btn-primary text-[12px]"
             >
               {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Reply className="h-4 w-4" />}
               Send counter
@@ -189,7 +189,7 @@ export function OfferCard({
               type="button"
               onClick={() => setCountering(false)}
               disabled={busy}
-              className="btn-secondary text-[11px]"
+              className="btn-secondary text-[12px]"
             >
               Cancel
             </button>
@@ -200,11 +200,11 @@ export function OfferCard({
       {/* Buyer actions on a seller counter */}
       {buyerActs && (
         <div className="grid grid-cols-2 gap-2">
-          <button type="button" onClick={onAccept} disabled={busy} className="btn-primary text-[11px]">
+          <button type="button" onClick={onAccept} disabled={busy} className="btn-primary text-[12px]">
             {busy ? <Loader2 className="h-4 w-4 animate-spin" /> : <Check className="h-4 w-4" />}
             Accept counter
           </button>
-          <button type="button" onClick={onDecline} disabled={busy} className="btn-danger text-[11px]">
+          <button type="button" onClick={onDecline} disabled={busy} className="btn-danger text-[12px]">
             <X className="h-4 w-4" />
             Decline
           </button>
@@ -217,7 +217,7 @@ export function OfferCard({
           type="button"
           onClick={onWithdraw}
           disabled={busy}
-          className="btn-ghost w-full text-[11px] text-muted"
+          className="btn-ghost w-full text-[12px] text-muted"
         >
           Withdraw offer
         </button>

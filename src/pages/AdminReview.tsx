@@ -133,10 +133,10 @@ export default function AdminReview() {
       {query ? (
         <section className="card space-y-2 px-5 py-4">
           <p className="field-label">Query</p>
-          <p className="text-[11px] text-muted">
+          <p className="text-[12px] text-muted">
             Raised by {query.raisedBy === "buyer" ? "buyer" : "seller"}
           </p>
-          <p className="text-[12px] leading-relaxed text-ink">
+          <p className="text-[13px] leading-relaxed text-ink">
             {query.details}
           </p>
         </section>
@@ -161,9 +161,9 @@ export default function AdminReview() {
 
       {canDecide ? (
         <form onSubmit={submit} className="card space-y-4 px-5 py-5 border-2 border-accent/40">
-          <h3 className="text-[13px] font-semibold text-ink">Decision</h3>
+          <h3 className="text-[14px] font-semibold text-ink">Decision</h3>
           {isProofWindow ? (
-            <p className="rounded-md border border-warning/30 bg-warning/5 px-3 py-2 text-[11px] leading-relaxed text-ink">
+            <p className="rounded-md border border-warning/30 bg-warning/5 px-3 py-2 text-[12px] leading-relaxed text-ink">
               Deciding before the proof window closes overrides the auto-rule.
               Use this only when you have enough proof to act now.
             </p>
@@ -229,7 +229,7 @@ export default function AdminReview() {
                   onChange={(e) => setSellerAmount(e.target.value)}
                 />
               </Field>
-              <p className="col-span-2 text-[10.5px] text-muted">
+              <p className="col-span-2 text-[11.5px] text-muted">
                 Must add up to {deal.priceAmount} {deal.priceCurrency}.
               </p>
             </div>
@@ -260,13 +260,13 @@ export default function AdminReview() {
           </button>
         </form>
       ) : (
-        <section className="card px-5 py-4 text-[11px] text-muted">
+        <section className="card px-5 py-4 text-[12px] text-muted">
           This deal isn't open for an admin decision.
         </section>
       )}
 
       <section className="card space-y-3 px-5 py-5">
-        <h3 className="text-[13px] font-semibold text-ink">Timeline</h3>
+        <h3 className="text-[14px] font-semibold text-ink">Timeline</h3>
         <DealTimeline events={events} />
       </section>
     </div>
@@ -287,7 +287,7 @@ function ProofColumn({
   return (
     <section className="card space-y-3 px-4 py-4">
       <header className="flex items-center justify-between">
-        <h4 className="text-[12px] font-semibold text-ink">{title}</h4>
+        <h4 className="text-[13px] font-semibold text-ink">{title}</h4>
         <span
           className={cn(
             "pill",
@@ -300,7 +300,7 @@ function ProofColumn({
         </span>
       </header>
       {proofs.length === 0 ? (
-        <p className="text-[11px] text-muted">
+        <p className="text-[12px] text-muted">
           No {tone} proof yet.
         </p>
       ) : (
@@ -310,7 +310,7 @@ function ProofColumn({
               key={p.id}
               className="rounded-lg border border-edge bg-bg px-3 py-2.5"
             >
-              <p className="text-[11.5px] text-ink">{p.explanation}</p>
+              <p className="text-[12.5px] text-ink">{p.explanation}</p>
               {p.txHash ? (
                 <div className="mt-2">
                   <TxHashLink hash={p.txHash} label="ref" />
@@ -321,7 +321,7 @@ function ProofColumn({
                   {p.attachmentUrls.map((url, i) => (
                     <li
                       key={i}
-                      className="truncate font-mono text-[10.5px] text-muted"
+                      className="truncate font-mono text-[11.5px] text-muted"
                     >
                       {url}
                     </li>
@@ -362,8 +362,8 @@ function DecisionChoice({
     >
       <span className="mt-0.5">{icon}</span>
       <span className="space-y-0.5">
-        <span className="block text-[12px] font-medium text-ink">{label}</span>
-        <span className="block text-[11px] text-muted">{description}</span>
+        <span className="block text-[13px] font-medium text-ink">{label}</span>
+        <span className="block text-[12px] text-muted">{description}</span>
       </span>
     </button>
   );

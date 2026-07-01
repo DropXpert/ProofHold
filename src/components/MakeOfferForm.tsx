@@ -34,7 +34,7 @@ export function MakeOfferForm({
   return (
     <form onSubmit={handleSubmit} className="card px-5 py-5 space-y-4">
       <div className="flex items-center justify-between">
-        <p className="flex items-center gap-2 text-[12px] font-semibold text-ink">
+        <p className="flex items-center gap-2 text-[13px] font-semibold text-ink">
           <Tag className="h-4 w-4 text-accent" />
           Make an offer
         </p>
@@ -54,16 +54,16 @@ export function MakeOfferForm({
           <input
             autoFocus
             inputMode="decimal"
-            className="input text-[13px] pr-14"
+            className="input text-[14px] pr-14"
             value={amount}
             onChange={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ""))}
             placeholder={listPrice}
           />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10.5px] font-medium text-muted">
+          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[11.5px] font-medium text-muted">
             {currency}
           </span>
         </div>
-        <p className="text-[10px] text-muted">
+        <p className="text-[11px] text-muted">
           List price is {listPrice} {currency}. The seller can accept, decline, or counter.
         </p>
       </div>
@@ -71,7 +71,7 @@ export function MakeOfferForm({
       <div className="space-y-1.5">
         <label className="field-label">Message to seller (optional)</label>
         <textarea
-          className="input min-h-[64px] resize-none text-[11.5px]"
+          className="input min-h-[64px] resize-none text-[12.5px]"
           maxLength={500}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -79,7 +79,7 @@ export function MakeOfferForm({
         />
       </div>
 
-      {error && <p className="text-[10.5px] text-danger">{error}</p>}
+      {error && <p className="text-[11.5px] text-danger">{error}</p>}
 
       <button type="submit" disabled={!valid || submitting} className="btn-primary w-full">
         {submitting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Tag className="h-4 w-4" />}

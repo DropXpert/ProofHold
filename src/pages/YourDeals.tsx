@@ -71,12 +71,12 @@ export default function YourDeals() {
       {/* Header row */}
       <div className="flex items-center justify-between pt-1">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">Your activity</p>
-          <h1 className="text-[18px] font-bold tracking-tight text-ink leading-tight">Your deals</h1>
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-muted">Your activity</p>
+          <h1 className="text-[19px] font-bold tracking-tight text-ink leading-tight">Your deals</h1>
         </div>
         <Link
           to="/create/new"
-          className="btn-primary flex items-center gap-1.5 px-3.5 py-2 text-[11px]"
+          className="btn-primary flex items-center gap-1.5 px-3.5 py-2 text-[12px]"
         >
           <FilePlus2 className="h-4 w-4" />
           New deal
@@ -88,8 +88,8 @@ export default function YourDeals() {
         <section className="space-y-2">
           <div className="flex items-center gap-2">
             <Tag className="h-3.5 w-3.5 text-accent" />
-            <p className="text-[10.5px] font-semibold uppercase tracking-wider text-muted">Your offers</p>
-            <span className="pill border-accent/40 bg-accent-soft text-[10px] text-accent-ink">
+            <p className="text-[11.5px] font-semibold uppercase tracking-wider text-muted">Your offers</p>
+            <span className="pill border-accent/40 bg-accent-soft text-[11px] text-accent-ink">
               {liveOffers.length}
             </span>
           </div>
@@ -115,10 +115,10 @@ export default function YourDeals() {
                       {accepted ? <CreditCard className="h-4 w-4" /> : <Tag className="h-4 w-4" />}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="text-[11.5px] font-semibold tabular-nums text-ink">
+                      <p className="text-[12.5px] font-semibold tabular-nums text-ink">
                         {o.currentAmount} {o.currency}
                       </p>
-                      <p className="text-[10px] text-muted">{statusLabel}</p>
+                      <p className="text-[11px] text-muted">{statusLabel}</p>
                     </div>
                     <ChevronRight className="h-4 w-4 shrink-0 text-muted" />
                   </Link>
@@ -134,8 +134,8 @@ export default function YourDeals() {
         <section className="space-y-2">
           <div className="flex items-center gap-2">
             <Zap className="h-3.5 w-3.5 text-warning" />
-            <p className="text-[10.5px] font-semibold uppercase tracking-wider text-muted">Needs action</p>
-            <span className="pill border-warning/40 bg-warning/10 text-[10px] text-warning">
+            <p className="text-[11.5px] font-semibold uppercase tracking-wider text-muted">Needs action</p>
+            <span className="pill border-warning/40 bg-warning/10 text-[11px] text-warning">
               {actionDeals.length}
             </span>
           </div>
@@ -153,7 +153,7 @@ export default function YourDeals() {
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted pointer-events-none" />
             <input
-              className="input pl-8 text-[12px]"
+              className="input pl-8 text-[13px]"
               placeholder="Search by title or deal ID"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -203,7 +203,7 @@ export default function YourDeals() {
           }
         />
       ) : filteredDeals.length === 0 ? (
-        <div className="card px-5 py-6 text-center text-[11px] text-muted">
+        <div className="card px-5 py-6 text-center text-[12px] text-muted">
           No deals match your search.
         </div>
       ) : (

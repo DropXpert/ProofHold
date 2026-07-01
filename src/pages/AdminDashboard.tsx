@@ -35,14 +35,14 @@ export default function AdminDashboard() {
           <MessageCircle className="h-4 w-4 text-accent" />
         </span>
         <div className="flex-1 min-w-0">
-          <p className="text-[12px] font-semibold text-ink">Support inbox</p>
-          <p className="text-[10.5px] text-muted">Reply to user deal queries</p>
+          <p className="text-[13px] font-semibold text-ink">Support inbox</p>
+          <p className="text-[11.5px] text-muted">Reply to user deal queries</p>
         </div>
-        <span className="text-muted text-[11px]">›</span>
+        <span className="text-muted text-[12px]">›</span>
       </Link>
 
       <section className="rounded-card border border-edge bg-accent-soft/40 px-4 py-3.5">
-        <p className="flex items-start gap-2 text-[11px] leading-relaxed text-ink">
+        <p className="flex items-start gap-2 text-[12px] leading-relaxed text-ink">
           <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
           <span>
             Deals in the proof window or awaiting an admin decision show up

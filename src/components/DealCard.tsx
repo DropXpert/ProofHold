@@ -13,10 +13,10 @@ export function DealCard({ deal, to }: { deal: Deal; to?: string }) {
     >
       <div className="min-w-0 flex-1 space-y-1.5">
         <div className="flex items-center justify-between gap-3">
-          <p className="truncate text-[13px] font-medium text-ink">
+          <p className="truncate text-[14px] font-medium text-ink">
             {deal.title || "Untitled deal"}
           </p>
-          <p className="shrink-0 text-[12px] font-semibold tabular-nums text-ink">
+          <p className="shrink-0 text-[13px] font-semibold tabular-nums text-ink">
             {deal.priceAmount}{" "}
             <span className="text-muted">{deal.priceCurrency}</span>
           </p>
@@ -25,10 +25,10 @@ export function DealCard({ deal, to }: { deal: Deal; to?: string }) {
           <div className="flex min-w-0 items-center gap-1.5 overflow-hidden">
             <StatusPill status={deal.status} compact />
             {deal.category && deal.category !== "other" && (
-              <CategoryTag category={deal.category} className="text-[10px] shrink-0" />
+              <CategoryTag category={deal.category} className="text-[11px] shrink-0" />
             )}
           </div>
-          <span className="shrink-0 text-[10.5px] text-muted">
+          <span className="shrink-0 text-[11.5px] text-muted">
             {formatRelative(deal.updatedAt)}
           </span>
         </div>

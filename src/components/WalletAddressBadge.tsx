@@ -25,7 +25,7 @@ export function WalletAddressBadge({
   );
 
   const cls = cn(
-    "inline-flex items-center gap-2 rounded-lg border border-edge bg-bg px-2.5 py-1 font-mono text-[11px] text-ink",
+    "inline-flex items-center gap-2 rounded-lg border border-edge bg-bg px-2.5 py-1 font-mono text-[12px] text-ink",
     linkToProfile && "hover:border-accent/50 transition",
     className
   );

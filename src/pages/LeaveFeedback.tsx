@@ -45,7 +45,7 @@ export default function LeaveFeedback() {
     return (
       <div className="space-y-5">
         <PageHeader eyebrow={`Deal · ${deal.id}`} title="Leave feedback" />
-        <div className="card px-5 py-4 text-[11.5px] text-muted">
+        <div className="card px-5 py-4 text-[12.5px] text-muted">
           Feedback can only be left after the deal is finalized (released or refunded).
         </div>
         <Link to={`/deal/${deal.id}/status`} className="btn-secondary w-full">
@@ -60,7 +60,7 @@ export default function LeaveFeedback() {
     return (
       <div className="space-y-5">
         <PageHeader eyebrow={`Deal · ${deal.id}`} title="Leave feedback" />
-        <div className="card px-5 py-4 text-[11.5px] text-muted">
+        <div className="card px-5 py-4 text-[12.5px] text-muted">
           Only the buyer or seller on this deal can leave feedback.
         </div>
         <Link to={`/deal/${deal.id}/status`} className="btn-secondary w-full">
@@ -82,8 +82,8 @@ export default function LeaveFeedback() {
         <PageHeader eyebrow={`Deal · ${deal.id}`} title="Feedback sent" />
         <div className="card flex flex-col items-center gap-3 px-5 py-8 text-center">
           <CheckCircle2 className="h-8 w-8 text-accent" />
-          <p className="text-[13px] font-medium text-ink">Feedback submitted!</p>
-          <p className="text-[11px] text-muted">
+          <p className="text-[14px] font-medium text-ink">Feedback submitted!</p>
+          <p className="text-[12px] text-muted">
             Your rating for this {recipientRole} has been recorded.
           </p>
           {recipientAddr ? (
@@ -139,8 +139,8 @@ export default function LeaveFeedback() {
 
       <div className="card px-5 py-4 space-y-1">
         <p className="field-label">Deal</p>
-        <p className="text-[13px] font-medium text-ink">{deal.title}</p>
-        <p className="text-[11px] text-muted">
+        <p className="text-[14px] font-medium text-ink">{deal.title}</p>
+        <p className="text-[12px] text-muted">
           Rate your experience as {myRole === "buyer" ? "a buyer" : "a seller"} on this deal.
         </p>
       </div>
@@ -151,7 +151,7 @@ export default function LeaveFeedback() {
             <div className="pt-1">
               <StarRating value={rating} onChange={setRating} size="lg" />
               {rating > 0 && (
-                <p className="mt-1.5 text-[10.5px] text-muted">
+                <p className="mt-1.5 text-[11.5px] text-muted">
                   {["", "Poor", "Fair", "Good", "Great", "Exceptional"][rating]}
                 </p>
               )}

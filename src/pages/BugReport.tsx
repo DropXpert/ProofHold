@@ -107,8 +107,8 @@ export default function BugReport() {
           <span className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-accent-soft">
             <CheckCircle2 className="h-6 w-6 text-accent" />
           </span>
-          <h2 className="mt-4 text-[15px] font-semibold text-ink">Thank you</h2>
-          <p className="mx-auto mt-2 max-w-[260px] text-[11px] leading-relaxed text-muted">
+          <h2 className="mt-4 text-[16px] font-semibold text-ink">Thank you</h2>
+          <p className="mx-auto mt-2 max-w-[260px] text-[12px] leading-relaxed text-muted">
             Your bug report has been sent.
           </p>
           <button
@@ -130,7 +130,7 @@ export default function BugReport() {
       <form onSubmit={handleSubmit} className="card px-5 py-5 space-y-4">
         <div className="flex items-start gap-3 rounded-lg border border-warning/25 bg-warning/10 px-3.5 py-3">
           <Bug className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-          <p className="text-[11px] leading-relaxed text-muted">
+          <p className="text-[12px] leading-relaxed text-muted">
             Reports go directly to the XcrowHub beta team.
           </p>
         </div>
@@ -146,7 +146,7 @@ export default function BugReport() {
         <div className="space-y-1.5">
           <label className="field-label">Bug summary</label>
           <input
-            className="input text-[12px]"
+            className="input text-[13px]"
             placeholder="e.g. Payment screen got stuck"
             value={summary}
             maxLength={120}
@@ -157,7 +157,7 @@ export default function BugReport() {
         <div className="space-y-1.5">
           <label className="field-label">Describe the bug</label>
           <textarea
-            className="textarea text-[12px]"
+            className="textarea text-[13px]"
             rows={6}
             placeholder="What went wrong? Add the screen, steps to reproduce, and what you expected to happen."
             value={description}
@@ -169,7 +169,7 @@ export default function BugReport() {
         <div className="space-y-1.5">
           <label className="field-label">Contact optional</label>
           <input
-            className="input text-[12px]"
+            className="input text-[13px]"
             placeholder="Telegram, email, or Nimiq address"
             value={contact}
             maxLength={180}
@@ -178,15 +178,15 @@ export default function BugReport() {
         </div>
 
         <div className="rounded-lg border border-edge bg-bg px-3.5 py-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Context</p>
-          <p className="mt-1 truncate font-mono text-[10px] text-muted">{sourcePath}</p>
+          <p className="text-[11px] font-semibold uppercase tracking-wider text-muted">Context</p>
+          <p className="mt-1 truncate font-mono text-[11px] text-muted">{sourcePath}</p>
           {session?.address ? (
-            <p className="mt-1 truncate font-mono text-[10px] text-muted">{session.address}</p>
+            <p className="mt-1 truncate font-mono text-[11px] text-muted">{session.address}</p>
           ) : null}
         </div>
 
         {error ? (
-          <div className="flex items-start gap-2 rounded-lg border border-danger/20 bg-danger/5 px-3 py-2.5 text-[10.5px] text-danger">
+          <div className="flex items-start gap-2 rounded-lg border border-danger/20 bg-danger/5 px-3 py-2.5 text-[11.5px] text-danger">
             <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
             <span>{error}</span>
           </div>
