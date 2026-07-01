@@ -133,7 +133,7 @@ function WalletMenu({ address }: { address: string }) {
         )}
       >
         <Wallet className="h-3.5 w-3.5 shrink-0" />
-        <span className="truncate">{shortenAddr(address)}</span>
+        <span>Wallet</span>
         <ChevronDown className={cn("h-3 w-3 shrink-0 transition-transform", open && "rotate-180")} />
       </button>
 
