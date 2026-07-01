@@ -9,7 +9,7 @@ function loadTheme(): Theme {
     const v = localStorage.getItem(STORAGE_KEY);
     if (v === "light" || v === "dark") return v;
   } catch {}
-  return "dark"; // default
+  return "light"; // default
 }
 
 function applyTheme(theme: Theme) {

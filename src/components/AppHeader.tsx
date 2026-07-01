@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Wallet, Loader2, Bell, LogOut, Copy, ChevronDown, Zap, Bug } from "lucide-react";
+import { Wallet, Loader2, Bell, LogOut, Zap, Bug } from "lucide-react";
+import { CopyButton } from "@/components/CopyButton";
 import { cn } from "@/lib/cn";
 import { useAuthStore } from "@/store/authStore";
 import { useNotificationStore } from "@/store/notificationStore";
@@ -99,7 +100,6 @@ function WalletMenu({ address }: { address: string }) {
   const { disconnect } = useAuthStore();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -109,12 +109,6 @@ function WalletMenu({ address }: { address: string }) {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-
-  function copyAddress() {
-    navigator.clipboard.writeText(address).catch(() => {});
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  }
 
   function handleDisconnect() {
     setOpen(false);
@@ -127,14 +121,13 @@ function WalletMenu({ address }: { address: string }) {
       <button
         type="button"
         onClick={() => setOpen((s) => !s)}
+        aria-label="Wallet"
         className={cn(
-          "pill border-accent/40 bg-accent-soft text-accent-ink max-w-[10rem] overflow-hidden transition",
-          open && "border-accent bg-accent/10"
+          "grid h-8 w-8 place-items-center rounded-lg border border-accent/40 bg-accent-soft text-accent-ink transition",
+          open && "border-accent bg-accent/10 text-accent"
         )}
       >
-        <Wallet className="h-3.5 w-3.5 shrink-0" />
-        <span>Wallet</span>
-        <ChevronDown className={cn("h-3 w-3 shrink-0 transition-transform", open && "rotate-180")} />
+        <Wallet className="h-4 w-4" />
       </button>
 
       {open && (
@@ -150,14 +143,10 @@ function WalletMenu({ address }: { address: string }) {
             <Wallet className="h-3.5 w-3.5 text-muted shrink-0" />
             <span className="truncate font-mono text-[10px] text-muted">{shortenAddr(address)}</span>
           </button>
-          <button
-            type="button"
-            onClick={copyAddress}
-            className="flex w-full items-center gap-2.5 px-4 py-3 text-[11px] text-ink hover:bg-bg transition border-b border-edge"
-          >
-            <Copy className="h-3.5 w-3.5 text-muted shrink-0" />
-            <span>{copied ? "Copied!" : "Copy address"}</span>
-          </button>
+          <div className="flex w-full items-center gap-2.5 px-4 py-3 border-b border-edge">
+            <CopyButton text={address} size="sm" />
+            <span className="text-[11px] text-ink">Copy address</span>
+          </div>
           <button
             type="button"
             onClick={handleDisconnect}

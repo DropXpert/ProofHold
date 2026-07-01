@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { CheckCircle2, Loader2, ShieldAlert } from "lucide-react";
+import { CheckCircle2, Loader2, ShieldAlert, FileQuestion } from "lucide-react";
 import { useDealStore } from "@/store/dealStore";
 import { PageHeader } from "@/components/PageHeader";
 import { ReceiptSummary } from "@/components/ReceiptSummary";
@@ -8,7 +8,7 @@ import { StatusPill } from "@/components/StatusPill";
 import { EmptyState } from "@/components/EmptyState";
 import { DealLoader } from "@/components/PageLoader";
 import { useDealWithRemoteLoad } from "@/hooks/useDealWithRemoteLoad";
-import { FileQuestion } from "lucide-react";
+import { AlertDialog } from "@/components/AlertDialog";
 
 export default function BuyerConfirm() {
   const { id } = useParams<{ id: string }>();
@@ -17,6 +17,7 @@ export default function BuyerConfirm() {
   const confirmReceipt = useDealStore((s) => s.confirmReceipt);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const confirmLock = useRef(false);
 
   if (!deal) {
@@ -82,7 +83,7 @@ export default function BuyerConfirm() {
           <div className="grid gap-2">
             <button
               type="button"
-              onClick={confirm}
+              onClick={() => setDialogOpen(true)}
               disabled={busy}
               className="btn-primary w-full"
             >
@@ -112,6 +113,17 @@ export default function BuyerConfirm() {
           This deal isn't waiting on buyer confirmation right now.
         </section>
       )}
+
+      <AlertDialog
+        open={dialogOpen}
+        onOpenChange={setDialogOpen}
+        title="Release funds to seller?"
+        description="This confirms you received what was promised. Funds will be released to the seller immediately and the deal closes."
+        actionLabel="Yes, release funds"
+        cancelLabel="Go back"
+        busy={busy}
+        onAction={confirm}
+      />
     </div>
   );
 }
