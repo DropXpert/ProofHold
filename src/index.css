@@ -78,7 +78,7 @@
   .textarea,
   .select {
     @apply w-full rounded-lg border border-edge bg-surface px-3.5 py-2.5
-           text-[15px] text-ink placeholder:text-muted/70
+           text-[13px] text-ink placeholder:text-muted/70
            focus:border-accent focus:ring-2 focus:ring-accent/20 focus:outline-none
            transition;
   }
@@ -88,8 +88,8 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3
-           text-[15px] font-medium transition active:scale-[0.99]
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5
+           text-[12px] font-medium transition active:scale-[0.99]
            disabled:opacity-50 disabled:pointer-events-none;
   }
 
@@ -228,7 +228,7 @@
   /* Gold primary button with sheen */
   .btn-gold {
     @apply inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3.5
-           text-[15px] font-semibold transition active:scale-[0.98];
+           text-[12px] font-semibold transition active:scale-[0.98];
     color: #1A1208;
     background: linear-gradient(180deg, #F5D89B 0%, #E8B964 100%);
     box-shadow:
@@ -244,7 +244,7 @@
 
   .btn-glass {
     @apply inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3.5
-           text-[15px] font-semibold text-[#EDE7DA] transition active:scale-[0.98];
+           text-[12px] font-semibold text-[#EDE7DA] transition active:scale-[0.98];
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.12);
   }
