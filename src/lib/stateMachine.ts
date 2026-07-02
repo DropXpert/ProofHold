@@ -63,3 +63,19 @@ export function isTerminal(status: DealStatus) {
     status === "expired"
   );
 }
+
+/**
+ * True when real funds are currently locked in escrow for this status —
+ * paid in, not yet released or refunded. Used for the Home "in escrow now"
+ * snapshot so it never counts unpaid (awaiting_payment) or settled deals.
+ */
+export function isFundsLocked(status: DealStatus) {
+  return (
+    status === "funds_held" ||
+    status === "delivered_by_seller" ||
+    status === "received_by_buyer" ||
+    status === "query_open" ||
+    status === "proof_window" ||
+    status === "under_admin_review"
+  );
+}

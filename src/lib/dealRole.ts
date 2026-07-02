@@ -50,3 +50,25 @@ export function dealNeedsAction(deal: Deal, role: DealRole): boolean {
   }
   return false;
 }
+
+/**
+ * The single next action this role should take on the deal, as a short verb +
+ * the route that performs it. Returns null when nothing is pending (mirrors
+ * dealNeedsAction). Drives the Home "needs your action" rail.
+ */
+export function dealActionHint(
+  deal: Deal,
+  role: DealRole
+): { verb: string; to: string } | null {
+  const s: DealStatus = deal.status;
+  if (role === "seller") {
+    if (s === "awaiting_payment") return { verb: "Share link", to: `/deal/${deal.id}/status` };
+    if (s === "funds_held") return { verb: "Deliver", to: `/deal/${deal.id}/seller` };
+    if (s === "proof_window") return { verb: "Add proof", to: `/deal/${deal.id}/proof` };
+  }
+  if (role === "buyer") {
+    if (s === "delivered_by_seller") return { verb: "Confirm", to: `/deal/${deal.id}/confirm` };
+    if (s === "proof_window") return { verb: "Add proof", to: `/deal/${deal.id}/proof` };
+  }
+  return null;
+}

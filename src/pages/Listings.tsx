@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Search, Plus, Package, Star } from "lucide-react";
 import { useListingStore } from "@/store/listingStore";
 import { useAuthStore } from "@/store/authStore";
@@ -12,18 +12,42 @@ import type { LucideIcon } from "lucide-react";
 const CAT_ICON_MAP: Record<string, LucideIcon> = { Package: PkgIcon, Palette, FileText, Code2, MessageSquare, Gamepad2, Tag };
 
 export default function Listings() {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState<DealCategory | "all">("all");
-  const { listings, loading, fetchAll } = useListingStore();
+  const [params, setParams] = useSearchParams();
+  const category: DealCategory | "all" = (() => {
+    const c = params.get("category");
+    return c && DEAL_CATEGORIES.includes(c as DealCategory) ? (c as DealCategory) : "all";
+  })();
+  const [search, setSearch] = useState(params.get("q") ?? "");
+  const listings = useListingStore((s) => s.listings);
+  const loading = useListingStore((s) => s.loading);
+  const fetchAll = useListingStore((s) => s.fetchAll);
   const session = useAuthStore((s) => s.session);
 
+  // The URL is the source of truth for filters, so Home's search bar and
+  // category tiles can deep-link straight into a filtered marketplace.
   useEffect(() => {
-    fetchAll({ category: category === "all" ? undefined : category, search });
-  }, [category]);
+    setSearch(params.get("q") ?? "");
+    fetchAll({
+      category: category === "all" ? undefined : category,
+      search: params.get("q") ?? "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
 
   function handleSearch(e: React.FormEvent) {
     e.preventDefault();
-    fetchAll({ category: category === "all" ? undefined : category, search });
+    const next = new URLSearchParams(params);
+    const q = search.trim();
+    if (q) next.set("q", q);
+    else next.delete("q");
+    setParams(next, { replace: true });
+  }
+
+  function selectCategory(c: DealCategory | "all") {
+    const next = new URLSearchParams(params);
+    if (c === "all") next.delete("category");
+    else next.set("category", c);
+    setParams(next, { replace: true });
   }
 
   return (
@@ -59,7 +83,7 @@ export default function Listings() {
       <div className="flex gap-1.5 overflow-x-auto scrollbar-hide pb-0.5 -mx-1 px-1">
         <button
           type="button"
-          onClick={() => setCategory("all")}
+          onClick={() => selectCategory("all")}
           className={`pill shrink-0 transition ${category === "all" ? "border-accent/40 bg-accent-soft text-accent-ink" : "border-edge bg-bg text-muted hover:text-ink"}`}
         >
           All
@@ -68,7 +92,7 @@ export default function Listings() {
           <button
             key={c}
             type="button"
-            onClick={() => setCategory(c)}
+            onClick={() => selectCategory(c)}
             className={`pill shrink-0 transition ${category === c ? "border-accent/40 bg-accent-soft text-accent-ink" : "border-edge bg-bg text-muted hover:text-ink"}`}
           >
             {(() => { const I = CAT_ICON_MAP[CATEGORY_ICON[c]]; return I ? <I className="h-3 w-3" /> : null; })()}

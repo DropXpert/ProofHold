@@ -59,9 +59,12 @@ function mapRow(row: any): Listing {
 interface ListingState {
   listings: Listing[];
   myListings: Listing[];
+  popular: Listing[];
   loading: boolean;
+  popularLoading: boolean;
 
   fetchAll: (filters?: { category?: string; search?: string }) => Promise<void>;
+  fetchPopular: () => Promise<void>;
   fetchMine: (sellerAddr: string) => Promise<void>;
   getListing: (id: string) => Listing | undefined;
   createListing: (input: CreateListingInput) => Promise<Listing>;
@@ -73,10 +76,12 @@ interface ListingState {
 export const useListingStore = create<ListingState>((set, get) => ({
   listings: [],
   myListings: [],
+  popular: [],
   loading: false,
+  popularLoading: false,
 
   getListing: (id) =>
-    [...get().listings, ...get().myListings].find((l) => l.id === id),
+    [...get().listings, ...get().popular, ...get().myListings].find((l) => l.id === id),
 
   fetchAll: async (filters) => {
     set({ loading: true });
@@ -105,6 +110,26 @@ export const useListingStore = create<ListingState>((set, get) => ({
       set({ listings: (data ?? []).map(mapRow), loading: false });
     } catch {
       set({ loading: false });
+    }
+  },
+
+  // Home's "popular" rail keeps its own slice so the marketplace page's
+  // filtered fetchAll() can never clobber it (they share no array).
+  fetchPopular: async () => {
+    if (!isSupabaseConfiguredForClient()) return;
+    set({ popularLoading: true });
+    try {
+      const sb = getSupabaseClient();
+      const { data } = await sb
+        .from("listings")
+        .select("*")
+        .eq("status", "active")
+        .order("orders_count", { ascending: false })
+        .order("created_at", { ascending: false })
+        .limit(12);
+      set({ popular: (data ?? []).map(mapRow), popularLoading: false });
+    } catch {
+      set({ popularLoading: false });
     }
   },
 
