@@ -1,9 +1,8 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Pencil, X, Camera, Package, ShieldCheck, Gift, ChevronRight, Moon, Sun } from "lucide-react";
-import { useThemeStore } from "@/store/themeStore";
+import { Pencil, X, Camera, Package, ShieldCheck, Gift, ChevronRight } from "lucide-react";
 import { CopyButton } from "@/components/CopyButton";
-import { ThemeToggleButton } from "@/components/ThemeToggleButton";
+import { Progress, ProgressTrack } from "@/components/ui/progress";
 import { useDealStore } from "@/store/dealStore";
 import { useAuthStore } from "@/store/authStore";
 import { useProfileStore } from "@/store/profileStore";
@@ -41,27 +40,6 @@ async function resizeImageToDataUrl(file: File, maxPx = 256): Promise<string> {
     img.onerror = reject;
     img.src = url;
   });
-}
-
-function AppearanceCard() {
-  const { theme } = useThemeStore();
-  const isDark = theme === "dark";
-  return (
-    <section className="card px-5 py-4">
-      <div className="flex w-full items-center justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent-soft">
-            {isDark ? <Moon className="h-4 w-4 text-accent" /> : <Sun className="h-4 w-4 text-warning" />}
-          </span>
-          <div>
-            <p className="text-[13px] font-semibold text-ink">Appearance</p>
-            <p className="text-[12px] text-muted">{isDark ? "Dark mode" : "Light mode"}</p>
-          </div>
-        </div>
-        <ThemeToggleButton />
-      </div>
-    </section>
-  );
 }
 
 export default function Profile() {
@@ -353,9 +331,6 @@ export default function Profile() {
       {/* Telegram notifications (own profile only) */}
       {isOwn && <TelegramConnectCard />}
 
-      {/* Appearance (own profile only) */}
-      {isOwn && <AppearanceCard />}
-
       {/* Rating distribution */}
       {receivedFeedbacks.length > 0 && (
         <section className="card px-5 py-4 space-y-3">
@@ -383,12 +358,9 @@ export default function Profile() {
                 >
                   <span className="w-3 text-right text-muted">{star}</span>
                   <span className="text-warning">★</span>
-                  <div className="flex-1 h-1.5 rounded-full bg-edge overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-warning transition-all"
-                      style={{ width: `${pct}%` }}
-                    />
-                  </div>
+                  <Progress value={pct} className="flex-1" aria-label={`${star} star ratings`}>
+                    <ProgressTrack className="h-1.5 bg-edge" indicatorClassName="bg-warning" />
+                  </Progress>
                   <span className="w-7 text-right text-muted">{count}</span>
                 </div>
               );

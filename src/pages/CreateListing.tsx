@@ -5,6 +5,7 @@ import { useListingStore } from "@/store/listingStore";
 import { useAuthStore } from "@/store/authStore";
 import { PageHeader } from "@/components/PageHeader";
 import { Field } from "@/components/Field";
+import { ConsentCheck } from "@/components/ConsentCheck";
 import { isCustodyAddress } from "@/lib/config";
 import type { Currency, DealCategory } from "@/types/deal";
 import { DEAL_CATEGORIES, CATEGORY_LABELS } from "@/types/deal";
@@ -30,6 +31,7 @@ export default function CreateListing() {
   const [tags, setTags] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const submitLock = useRef(false);
 
   useEffect(() => {
@@ -56,6 +58,8 @@ export default function CreateListing() {
     if (!priceAmount || Number(priceAmount) <= 0) return setError("Add a price.");
     if (!requiredDeliveryProof.trim()) return setError("Describe what counts as delivery.");
     if (!refundTerms.trim()) return setError("Add refund terms.");
+    if (!agreed)
+      return setError("Please confirm you understand how escrow works.");
 
     submitLock.current = true;
     setSubmitting(true);
@@ -236,9 +240,11 @@ export default function CreateListing() {
           </div>
         </section>
 
+        <ConsentCheck checked={agreed} onChange={setAgreed} />
+
         {error && <p className="text-sm text-danger">{error}</p>}
 
-        <button type="submit" className="btn-primary w-full" disabled={submitting || authLoading}>
+        <button type="submit" className="btn-primary w-full" disabled={submitting || authLoading || !agreed}>
           {submitting ? "Publishing..." : "Publish listing"}
         </button>
       </form>

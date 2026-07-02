@@ -5,6 +5,7 @@ import { useDealStore } from "@/store/dealStore";
 import { useAuthStore } from "@/store/authStore";
 import { PageHeader } from "@/components/PageHeader";
 import { Field } from "@/components/Field";
+import { ConsentCheck } from "@/components/ConsentCheck";
 import { WalletAddressBadge } from "@/components/WalletAddressBadge";
 import { isCustodyAddress } from "@/lib/config";
 import {
@@ -51,6 +52,7 @@ export default function CreateDeal() {
   const [sellerAddress, setSellerAddress] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const submitLock = useRef(false);
 
   useEffect(() => {
@@ -90,6 +92,8 @@ export default function CreateDeal() {
     if (!form.requiredDeliveryProof.trim())
       return setError("Describe what counts as delivery.");
     if (!form.refundTerms.trim()) return setError("Add refund terms.");
+    if (!agreed)
+      return setError("Please confirm you understand how escrow works.");
     submitLock.current = true;
     setSubmitting(true);
     try {
@@ -297,6 +301,8 @@ export default function CreateDeal() {
           </p>
         ) : null}
 
+        <ConsentCheck checked={agreed} onChange={setAgreed} />
+
         {error ? (
           <p className="text-sm text-danger" role="alert">
             {error}
@@ -306,7 +312,7 @@ export default function CreateDeal() {
         <button
           type="submit"
           className="btn-primary w-full"
-          disabled={submitting || authLoading || activeDealLimitReached}
+          disabled={submitting || authLoading || activeDealLimitReached || !agreed}
         >
           {submitting
             ? <Loader2 className="h-4 w-4 animate-spin" />

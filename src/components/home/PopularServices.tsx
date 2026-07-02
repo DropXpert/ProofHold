@@ -39,11 +39,9 @@ export function PopularServices() {
   const top = listings.slice(0, 8);
 
   return (
-    <section className="space-y-2">
+    <section className="space-y-3">
       <div className="flex items-center justify-between">
-        <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">
-          Popular services
-        </p>
+        <h2 className="text-[15px] font-semibold text-ink">Popular services</h2>
         <Link
           to="/listings"
           className="inline-flex items-center gap-0.5 text-[12px] font-medium text-accent"

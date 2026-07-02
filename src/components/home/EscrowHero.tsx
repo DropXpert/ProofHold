@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import {
-  ShieldCheck, FilePlus2, ArrowRight, Lock, CheckCircle2,
+  ShieldCheck, FilePlus2, ArrowRight, Lock, CheckCircle2, QrCode,
 } from "lucide-react";
 import type { Currency } from "@/types/deal";
 
@@ -79,7 +79,7 @@ function EscrowSnapshot({
 
   return (
     <Link to="/create" className="block active:scale-[0.99] transition">
-      <span className="inline-flex items-center gap-1.5 rounded-md bg-white/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-white/90">
+      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-widest text-white/75">
         <Lock className="h-3 w-3" />
         In escrow now
       </span>
@@ -120,12 +120,7 @@ function ValueProp({
 }) {
   return (
     <div>
-      <span className="inline-flex items-center gap-1.5 rounded-md bg-white/15 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-widest text-white/90">
-        <ShieldCheck className="h-3 w-3" />
-        On-chain escrow
-      </span>
-
-      <h1 className="mt-3 text-[24px] font-bold leading-[1.15] tracking-tight">
+      <h1 className="text-[24px] font-bold leading-[1.15] tracking-tight">
         Get paid safely.
         <br />
         Or get it all back.
@@ -164,11 +159,11 @@ function ValueProp({
       )}
 
       <Link
-        to="/listings"
-        className="mt-2.5 inline-flex items-center gap-1 text-[13px] text-white/85 underline-offset-2 hover:underline"
+        to="/scan"
+        className="mt-2.5 inline-flex items-center gap-1.5 text-[13px] text-white/85 underline-offset-2 hover:underline"
       >
-        Browse services
-        <ArrowRight className="h-3.5 w-3.5" />
+        <QrCode className="h-3.5 w-3.5" />
+        Scan to pay
       </Link>
 
       <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-white/80">

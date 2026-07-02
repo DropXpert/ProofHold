@@ -10,6 +10,7 @@ import { CategoryTag } from "@/components/CategoryTag";
 import { WalletAddressBadge } from "@/components/WalletAddressBadge";
 import { MakeOfferForm } from "@/components/MakeOfferForm";
 import { OfferCard } from "@/components/OfferCard";
+import { AlertDialog } from "@/components/AlertDialog";
 import {
   ACTIVE_DEAL_LIMIT,
   ACTIVE_DEAL_LIMIT_MESSAGE,
@@ -448,31 +449,25 @@ export default function ListingDetail() {
                   : <><Play className="h-4 w-4" />Activate</>}
               </button>
 
-              {confirmingDelete ? (
-                <button type="button" onClick={handleDelete} className="btn-danger w-full text-[13px]">
-                  <Trash2 className="h-4 w-4" />
-                  Confirm delete
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setConfirmingDelete(true)}
-                  className="btn-danger w-full text-[13px]"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  Delete
-                </button>
-              )}
-            </div>
-            {confirmingDelete && (
               <button
                 type="button"
-                onClick={() => setConfirmingDelete(false)}
-                className="text-[12.5px] text-muted hover:text-ink transition"
+                onClick={() => setConfirmingDelete(true)}
+                className="btn-danger w-full text-[13px]"
               >
-                Cancel
+                <Trash2 className="h-4 w-4" />
+                Delete
               </button>
-            )}
+            </div>
+            <AlertDialog
+              open={confirmingDelete}
+              onOpenChange={setConfirmingDelete}
+              title="Delete this listing?"
+              description="Buyers will no longer be able to find or purchase it. This can't be undone."
+              cancelLabel="Keep listing"
+              actionLabel="Delete listing"
+              onAction={handleDelete}
+              destructive
+            />
             <div className={`rounded-lg px-3 py-2 text-[12.5px] text-center ${l.status === "active" ? "bg-accent-soft text-accent-ink" : "bg-warning/10 text-warning"}`}>
               {l.status === "active" ? "Live, buyers can purchase" : "Paused, hidden from browse"}
             </div>

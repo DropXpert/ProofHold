@@ -18,7 +18,9 @@ import { ReceiptSummary } from "@/components/ReceiptSummary";
 import { DealTimeline } from "@/components/DealTimeline";
 import { WhatHappensNext } from "@/components/WhatHappensNext";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { EscrowProgress } from "@/components/EscrowProgress";
 import { ActionPanel } from "@/components/ActionPanel";
+import { AlertDialog } from "@/components/AlertDialog";
 import { TxHashLink } from "@/components/TxHashLink";
 import { EmptyState } from "@/components/EmptyState";
 import { isTerminal } from "@/lib/stateMachine";
@@ -110,6 +112,8 @@ export default function DealStatus() {
       />
 
       <DisputeBanner deal={deal} />
+
+      <EscrowProgress status={deal.status} />
 
       <WhatHappensNext status={deal.status} />
 
@@ -364,26 +368,7 @@ function RoleActions({
           </Link>
         )}
         {role === "seller" ? (
-          confirmingCancel ? (
-            <div className="flex gap-2">
-              <button
-                type="button"
-                onClick={confirmCancel}
-                disabled={canceling}
-                className="btn-danger flex-1"
-              >
-                <Trash2 className="h-4 w-4" />
-                {canceling ? "Cancelling..." : "Confirm cancel"}
-              </button>
-              <button
-                type="button"
-                onClick={() => setConfirmingCancel(false)}
-                className="btn-ghost flex-1"
-              >
-                Keep deal
-              </button>
-            </div>
-          ) : (
+          <>
             <button
               type="button"
               onClick={() => setConfirmingCancel(true)}
@@ -392,7 +377,18 @@ function RoleActions({
               <Trash2 className="h-4 w-4" />
               Cancel deal
             </button>
-          )
+            <AlertDialog
+              open={confirmingCancel}
+              onOpenChange={setConfirmingCancel}
+              title="Cancel this deal?"
+              description="The payment link stops working and the buyer can no longer pay. This can't be undone."
+              cancelLabel="Keep deal"
+              actionLabel={canceling ? "Cancelling…" : "Cancel deal"}
+              onAction={confirmCancel}
+              destructive
+              busy={canceling}
+            />
+          </>
         ) : null}
       </ActionPanel>
     );

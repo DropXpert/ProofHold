@@ -133,11 +133,9 @@ export default function Home() {
 
       {/* Your deals */}
       {session && recentDeals.length > 0 && (
-        <section className="space-y-2">
+        <section className="space-y-3">
           <div className="flex items-center justify-between">
-            <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">
-              Your deals
-            </p>
+            <h2 className="text-[15px] font-semibold text-ink">Your deals</h2>
             <Link
               to="/create"
               className="inline-flex items-center gap-0.5 text-[12px] font-medium text-accent"
@@ -149,7 +147,7 @@ export default function Home() {
           <ul className="space-y-2">
             {recentDeals.map((d) => (
               <li key={d.id}>
-                <DealCard deal={d} />
+                <DealCard deal={d} showProgress />
               </li>
             ))}
           </ul>

@@ -18,15 +18,11 @@ export function NeedsActionRail({ items }: { items: ActionItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <section className="space-y-2">
+    <section className="space-y-3">
       <div className="flex items-center gap-1.5">
-        <Zap className="h-3.5 w-3.5 text-warning" />
-        <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">
-          Needs your action
-        </p>
-        <span className="pill border-warning/40 bg-warning/10 text-[11px] text-warning">
-          {items.length}
-        </span>
+        <Zap className="h-4 w-4 text-warning" />
+        <h2 className="text-[15px] font-semibold text-ink">Needs your action</h2>
+        <span className="text-[13px] text-muted">({items.length})</span>
       </div>
 
       <div className="-mx-5 flex gap-2.5 overflow-x-auto scrollbar-hide px-5 pb-0.5 snap-x">
@@ -40,9 +36,9 @@ export function NeedsActionRail({ items }: { items: ActionItem[] }) {
               {deal.title || "Untitled deal"}
             </p>
             <StatusPill status={deal.status} compact />
-            <span className="mt-auto inline-flex items-center gap-1 self-start rounded-md bg-warning/12 px-2 py-1 text-[12px] font-semibold text-warning">
+            <span className="mt-auto inline-flex items-center gap-1 self-start text-[12.5px] font-semibold text-warning">
               {verb}
-              <ArrowRight className="h-3 w-3" />
+              <ArrowRight className="h-3.5 w-3.5" />
             </span>
           </Link>
         ))}

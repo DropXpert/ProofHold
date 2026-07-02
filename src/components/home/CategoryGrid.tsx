@@ -23,10 +23,8 @@ const ICON_MAP: Record<DealCategory, LucideIcon> = {
  */
 export function CategoryGrid() {
   return (
-    <section className="space-y-2">
-      <p className="text-[12px] font-semibold uppercase tracking-widest text-muted">
-        Browse by category
-      </p>
+    <section className="space-y-3">
+      <h2 className="text-[15px] font-semibold text-ink">Browse by category</h2>
       <div className="grid grid-cols-2 gap-2">
         {DEAL_CATEGORIES.map((c) => {
           const Icon = ICON_MAP[c];
